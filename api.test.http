@@ -1,0 +1,38 @@
+@base_url = http://localhost
+
+@port = 3000
+
+@url = {{base_url}}:{{port}}
+
+@user_api = {{url}}/manager
+
+GET {{user_api}} HTTP/1.1
+###
+GET {{user_api}}/2 HTTP/1.1
+###
+POST {{user_api}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "สิรภพ สุขใจ",
+    "shop_name": "ร้านปันสุข",
+    "username": "sukjaishop",
+    "password": "12121212",
+    "email": "siraphop@gmail.com",
+    "phone": "0821534458"
+}
+###
+PUT {{user_api}}/3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "แสนดี สีใจก๋า",
+    "shop_name": "ร้านแสนดี",
+    "username": "sandeeshop",
+    "password": "88888888",
+    "email": "sandee123@gmail.com",
+    "phone": "0817786652"
+}
+###
+
+DELETE  {{user_api}}/4 HTTP/1.1
