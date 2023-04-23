@@ -1,37 +1,38 @@
-const db = require('../database/models');
+const db = require("../database/models");
+const { Op } = require("sequelize");
+exports.findAll = async () =>
+  await db.Managers.findAll({
+    order: [["id", "ASC"]],
+  });
 
-exports.findAll = async () => await db.Managers.findAll({
-    order: [
-        ['id', 'ASC']
-    ]
-})
+exports.findByID = async (id) => await db.Managers.findByPk(id);
 
-exports.findByID = async (id) => await db.Managers.findByPk(id)
-
-exports.checkUser = async (username, email) => await db.Managers.findAll({
+exports.checkUser = async (username, email) =>
+  await db.Managers.findAll({
     where: {
-        username: username,
-        email: email,
-    }
-})
+      [Op.or]: [{ username: username }, { email: email }],
+    },
+  });
 
-exports.checkUserPass = async (username, password) => await db.Managers.findAll({
+exports.checkUserPass = async (username) =>
+  await db.Managers.findAll({
     where: {
-        username: username,
-        password: password,
-    }
-})
+      username: username,
+    },
+  });
 
-exports.add = async (manager1) => await db.Managers.create(manager1)
+exports.add = async (manager1) => await db.Managers.create(manager1);
 
-exports.update = async (id, manager1) => await db.Managers.update(manager1, {
+exports.update = async (id, manager1) =>
+  await db.Managers.update(manager1, {
     where: {
-        id: id,
-    }
-})
+      id: id,
+    },
+  });
 
-exports.remove = async (id) => await db.Managers.destroy({
+exports.remove = async (id) =>
+  await db.Managers.destroy({
     where: {
-        id: id
-    }
-})
+      id: id,
+    },
+  });

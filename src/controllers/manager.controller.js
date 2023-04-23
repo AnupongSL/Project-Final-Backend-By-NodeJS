@@ -1,4 +1,6 @@
 const managerService = require("../services/manager.services");
+const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 
 exports.getManager = async (req, res) => res.json(await managerService.findManagerAll());
 
@@ -21,11 +23,27 @@ exports.getManagerByUsername = async (req, res) => {
 }
 
 exports.Login = async (req, res) => {
-  const result = await managerService.findManagerByUsername_password(req.body.username, req.body.password)
-  if(result != ''){
-    res.json("เข้าสู่ระบบเรียบร้อยแล้ว")
-  } else {
-    res.status(404).json("username หรือ password ของท่านไม่ถูกต้อง")
+  const result = await managerService.findManagerByUsername_password(req.body.username, req.body.password);
+  if (result) {
+    const myArray = result;
+    const passwordA = myArray[0]["password"];
+    const isMatch = await bcrypt.compare(req.body.password, passwordA);
+    if (!isMatch) {
+      return res.status(400).send("Password Invalid!!")
+    }
+    const payload = {
+      result: {
+        username: req.body.username,
+        password: req.body.password,
+      },
+    };
+    jwt.sign(payload, "jwtSecret", { expiresIn: 3600 }, (err, token) => {
+      if(err) throw err;
+      res.json({token, payload})
+    });
+  }
+  else{
+    res.status(400).json("User Not found!!")
   }
 }
 
