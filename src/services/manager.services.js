@@ -1,5 +1,4 @@
 const managerRepository = require("../repositories/manager.repositories");
-const bcrypt = require('bcryptjs')
 
 exports.findManagerAll = async () => await managerRepository.findAll();
 
@@ -9,13 +8,7 @@ exports.findManagerByUsername = async (username, email) => await managerReposito
 
 exports.findManagerByUsername_password = async (username, password) => await managerRepository.checkUserPass(username, password);
 
-exports.findAddManager = async (manager1) => {
-  const salt = await bcrypt.genSalt(10);
-  manager1.password = await bcrypt.hash(manager1.password, salt);
-  manager1.email = await bcrypt.hash(manager1.email, salt);
-  manager1.phone = await bcrypt.hash(manager1.password, salt);
-  return await managerRepository.add({...manager1});
-};
+exports.findAddManager = async (manager1) => await managerRepository.add({...manager1});;
 exports.findUpdateManager = async (id, manager1) => {
   const result = await managerRepository.findByID(id);
   if (result) {

@@ -27,8 +27,7 @@ exports.Login = async (req, res) => {
   if (result) {
     const myArray = result;
     const passwordA = myArray[0]["password"];
-    const isMatch = await bcrypt.compare(req.body.password, passwordA);
-    if (!isMatch) {
+    if (passwordA == req.body.password) {
       return res.status(400).send("Password Invalid!!")
     }
     const payload = {

@@ -18,9 +18,10 @@ Content-Type: application/json
     "username": "sirapop1",
     "email": "siraphop5@gmail.com"
 }
+
 ###
 
-POST {{user_api}}/login HTTP/1.1
+GET {{user_api}}/login HTTP/1.1
 Content-Type: application/json
 
 {
