@@ -22,6 +22,10 @@ exports.getManagerUsernameEmail = async (req, res) => {
   }
 }
 
+exports.checkToken = async (req, res) =>  {
+  res.json("The token is vailable.");
+  return true;
+}
 exports.loginManager = async (req, res) => {
   const  {username,  password} = req.body
   const token = await managerService.servLogin(username, password)

@@ -14,6 +14,11 @@
 
 GET {{user_api}}/getmanager HTTP/1.1
 ###
+
+GET {{user_api}}/checktoken HTTP/1.1
+Authorization: {{bearerToken}}
+###
+
 GET {{user_api}}/getmanager/2 HTTP/1.1
 ###
 GET {{user_api}}/getmanagerbyusername HTTP/1.1
@@ -42,9 +47,9 @@ Content-Type: application/json
 {
     "name": "อนุพงศ์ สูตรเลข",
     "shop_name": "ร้านปันสุข",
-    "username": "anuponga2",
+    "username": "anuponga25",
     "password": "11111za",
-    "email": "anuponga2@gmail.com",
+    "email": "anuponga25@gmail.com",
     "phone": "0871123654"
 }
 ###

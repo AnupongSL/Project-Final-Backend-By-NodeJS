@@ -8,6 +8,8 @@ router.get('/getmanager/:id', managerController.getManagerByID)
 
 router.get('/getmanagerbyusername', managerController.getManagerUsernameEmail)
 
+router.get('/checktoken', jwt.verifyToken, managerController.checkToken);
+
 router.post('/login', managerController.loginManager)
 
 router.post('/register', managerController.addManager)
