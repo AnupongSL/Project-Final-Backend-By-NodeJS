@@ -23,6 +23,7 @@ const data = [
     username: "sukjaishop",
     password: "12121212",
     email: "siraphop@gmail.com",
-    phone: "0821534458"
+    phone: "0821534458",
+    role: "manager"
 },
 ];

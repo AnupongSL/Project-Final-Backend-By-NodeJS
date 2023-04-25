@@ -1,22 +1,18 @@
 const router = require('express').Router();
 const managerController = require('../controllers/manager.controller')
-const auth = require('../middleware/middleware')
+const jwt = require('../middleware/jwt')
 
 router.get('/getmanager', managerController.getManager)
 
 router.get('/getmanager/:id', managerController.getManagerByID)
 
-router.get('/getmanagerbyusername', managerController.getManagerByUsername)
+router.get('/getmanagerbyusername', managerController.getManagerUsernameEmail)
 
-router.get('/test',auth.authenthication, (req,res) => {
-    console.log("Hello");
-})
-
-router.get('/login', managerController.Login)
+router.post('/login', managerController.loginManager)
 
 router.post('/register', managerController.addManager)
 
-router.put('/editmanager/:id', managerController.updateManager)
+router.put('/editmanager',jwt.verifyToken, managerController.updateManager)
 
 router.delete('/deletemanager/:id', managerController.deleteManager)
 

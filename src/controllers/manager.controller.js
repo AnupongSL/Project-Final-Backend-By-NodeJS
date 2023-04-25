@@ -2,10 +2,10 @@ const managerService = require("../services/manager.services");
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
-exports.getManager = async (req, res) => res.json(await managerService.findManagerAll());
+exports.getManager = async (req, res) => res.json(await managerService.servAll());
 
 exports.getManagerByID = async (req, res) => {
-  const result = await managerService.findManagerByID(req.params.id)
+  const result = await managerService.servByID(req.params.id)
   if(result){
     res.json(result)
   } else {
@@ -13,8 +13,8 @@ exports.getManagerByID = async (req, res) => {
   }
 };
 
-exports.getManagerByUsername = async (req, res) => {
-  const result = await managerService.findManagerByUsername(req.body.username, req.body.email)
+exports.getManagerUsernameEmail = async (req, res) => {
+  const result = await managerService.servUnEm(req.body.username, req.body.email)
   if(result){
     res.json(result)
   } else {
@@ -22,40 +22,26 @@ exports.getManagerByUsername = async (req, res) => {
   }
 }
 
-exports.Login = async (req, res) => {
-  const result = await managerService.findManagerByUsername_password(req.body.username, req.body.password);
-  if (result) {
-    const myArray = result;
-    const passwordA = myArray[0]["password"];
-    if (passwordA == req.body.password) {
-      return res.status(400).send("Password Invalid!!")
-    }
-    const payload = {
-      result: {
-        username: req.body.username,
-        password: req.body.password,
-      },
-    };
-    jwt.sign(payload, "jwtSecret", { expiresIn: 3600 }, (err, token) => {
-      if(err) throw err;
-      res.json({token, payload})
-    });
+exports.loginManager = async (req, res) => {
+  const  {username,  password} = req.body
+  const token = await managerService.servLogin(username, password)
+  if(!token){
+    res.status(401).json()
+    return
   }
-  else{
-    res.status(400).json("User Not found!!")
-  }
+  res.json({token})
 }
 
 exports.addManager = async (req, res) => {
-  const result = await managerService.findManagerByUsername(req.body.username, req.body.email)
-  if(result != ''){
+  const result = await managerService.servUnEm(req.body.username, req.body.email)
+  if(result !== ''){
     res.status(500).json("username หรือ email ของท่านมีผู้อื่นใช้ไปแล้ว กรุณาใช้ username หรือ email อื่น");
   } else {
-  res.status(201).json(await managerService.findAddManager(req.body));
+  res.status(201).json(await managerService.servAdd(req.body));
  }
 };
 exports.updateManager = async (req, res) => {
-  const result = await managerService.findUpdateManager(req.params.id, req.body);
+  const result = await managerService.servUpdate(req.sub, req.body);
   if (result) {
     res.json(result);
   } else {
@@ -64,7 +50,7 @@ exports.updateManager = async (req, res) => {
 };
 
 exports.deleteManager = async (req, res) => {
-  const result = await managerService.findDeleteManager(req.params.id)
+  const result = await managerService.servDelete(req.params.id)
   if (result) {
     res.status(204).json()
   } else {

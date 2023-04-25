@@ -1,23 +1,38 @@
 const managerRepository = require("../repositories/manager.repositories");
+const bcrypt = require('bcryptjs')
+const jwt = require('../middleware/jwt')
 
-exports.findManagerAll = async () => await managerRepository.findAll();
+exports.servAll = async () => await managerRepository.repoAll();
 
-exports.findManagerByID = async (id) => await managerRepository.findByID(id);
+exports.servByID = async (id) => await managerRepository.repoByID(id);
 
-exports.findManagerByUsername = async (username, email) => await managerRepository.checkUser(username, email);
+exports.servUnEm = async (username, email) => await managerRepository.repoUnEm(username, email);
 
-exports.findManagerByUsername_password = async (username, password) => await managerRepository.checkUserPass(username, password);
+exports.servLogin = async (username, password) => {
+  const result = await managerRepository.repoUsername(username);
+  const myArray = result;
+  const passwordA = myArray[0]["password"];
+  const role = myArray[0]["role"];
+  if (passwordA == password){
+    const payload = {
+      sub: username,
+      role: role
+    }
+    return jwt.generateToken(payload)
+  }
+}
 
-exports.findAddManager = async (manager1) => await managerRepository.add({...manager1});;
-exports.findUpdateManager = async (id, manager1) => {
-  const result = await managerRepository.findByID(id);
+exports.servAdd = async (manager1) => await managerRepository.repoAdd({...manager1, role: "manager"});;
+
+exports.servUpdate = async (username, manager1) => {
+  const result = await managerRepository.repoUsername(username);
   if (result) {
-    const updated = await managerRepository.update(result.id, { ...manager1 });
+    const updated = await managerRepository.repoUpdate(username, { ...manager1, role:"manager", username });
     if (updated) {
-        return await managerRepository.findByID(id);
+        return await managerRepository.repoUsername(username);
       }
   }
   return null;
 };
 
-exports.findDeleteManager = async (id) => await managerRepository.remove(id)
+exports.servDelete = async (id) => await managerRepository.repoRemove(id)

@@ -6,10 +6,13 @@
 
 @user_api = {{url}}/manager
 
+@admin_api = {{url}}/admin
+
+@bearerToken = Bearer {{login.response.body.token}}
+
 GET {{user_api}}/getmanager HTTP/1.1
 ###
 GET {{user_api}}/getmanager/2 HTTP/1.1
-
 ###
 GET {{user_api}}/getmanagerbyusername HTTP/1.1
 Content-Type: application/json
@@ -21,12 +24,13 @@ Content-Type: application/json
 
 ###
 
+# @name login
 GET {{user_api}}/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "sirapop1119",
-    "password": "12345"
+    "username": "anuponga",
+    "password": "11111za"
 }
 
 ###
@@ -34,25 +38,74 @@ POST {{user_api}}/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "สิรภพ สุขใจ1",
+    "name": "อนุพงศ์ สูตรเลข",
     "shop_name": "ร้านปันสุข",
-    "username": "sirapop111111",
-    "password": "12345",
-    "email": "siraphop11124@gmail.com",
-    "phone": "0821534458"
+    "username": "anuponga2",
+    "password": "11111za",
+    "email": "anuponga2@gmail.com",
+    "phone": "0871123654"
 }
 ###
-PUT {{user_api}}/editmanager/3 HTTP/1.1
+PUT {{user_api}}/editmanager HTTP/1.1
+Authorization: {{bearerToken}}
 Content-Type: application/json
 
 {
-    "name": "แสนดี สีใจก๋า",
-    "shop_name": "ร้านแสนดี",
-    "username": "sandeeshop",
-    "password": "88888888",
-    "email": "sandee123@gmail.com",
-    "phone": "0817786652"
+    "name": "อนุพงศ์ สูตรเลข",
+    "shop_name": "ร้านแสนบาน",
+    "password": "11111za",
+    "email": "anupong@gmail.com",
+    "phone": "0899999921"
 }
 ###
 
 DELETE  {{user_api}}/deletemanager/4 HTTP/1.1
+
+
+// Admin
+###
+GET {{admin_api}}/getadmin HTTP/1.1
+Authorization: {{bearerToken}}
+
+###
+GET {{admin_api}}/getadmin/2 HTTP/1.1
+Authorization: {{bearerToken}}
+###
+GET {{admin_api}}/getadminbyname HTTP/1.1
+Authorization: {{bearerToken}}
+Content-Type: application/json
+
+{
+    "nameadmin": "admindew"
+}
+
+###
+POST {{admin_api}}/registeradmin HTTP/1.1
+Authorization: {{bearerToken}}
+Content-Type: application/json
+
+{
+    "nameadmin": "adminpond",
+    "phoneadmin": "0955786621",
+    "emailadmin": "adminaek@gmail.com",
+    "usernameadmin": "adminpond",
+    "passwordadmin": "123456za"
+}
+
+###
+
+PUT  {{admin_api}}/updateadmin/2 HTTP/1.1
+Content-Type: application/json
+Authorization: {{bearerToken}}
+
+{
+    "nameadmin": "แอดมินฟัง",
+    "phoneadmin": "0955786865",
+    "emailadmin": "adminaek@gmail.com",
+    "usernameadmin": "adminaekza1",
+    "passwordadmin": "111111za"
+}
+
+###
+DELETE {{admin_api}}/deleteadmin/5 HTTP/1.1
+Authorization: {{bearerToken}}
