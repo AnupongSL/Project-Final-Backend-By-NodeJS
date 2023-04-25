@@ -1,21 +1,23 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const cors = require('cors');
-const dotenv = require('dotenv')
+const cors = require("cors");
+const dotenv = require("dotenv");
 
-dotenv.config()
+dotenv.config();
 
-app.use(express.json())
+app.use("/image", express.static("./images"));
 
-app.use(cors())
+app.use(express.json());
 
-app.use(require('./src/routers/routes'))
+app.use(cors());
 
-const port = process.env.PORT || 3000
-const env = process.env.NODE_ENV || "development"
+app.use(require("./src/routers/routes"));
+
+const port = process.env.PORT || 3000;
+const env = process.env.NODE_ENV || "development";
 
 app.listen(port, () => {
-    console.log(`Listening on http://localhost:${port}`);
-    console.log("Press Ctrl + C to quit.");
-    console.log(`ENV on: ${env}`);
-})
+  console.log(`Listening on http://localhost:${port}`);
+  console.log("Press Ctrl + C to quit.");
+  console.log(`ENV on: ${env}`);
+});

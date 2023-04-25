@@ -1,39 +1,43 @@
 const db = require("../database/models");
 const { Op } = require("sequelize");
 
-exports.findManager = async (manager) =>
+exports.repoProductAll = async (manager) =>
 await db.Products.findAll({
   where: {
     manager: manager,
   },
 });
 
-exports.findAll = async () =>
-  await db.Products.findAll({
-    order: [["id", "ASC"]],
-  });
-
-exports.findByID = async (id) => await db.Products.findByPk(id);
-
-exports.findByName = async (nameproduct) =>
+exports.repoProductByID = async (manager, id) =>
   await db.Products.findAll({
     where: {
-        nameproduct: nameproduct,
+      manager: manager,
+      id: id,
     },
   });
 
-exports.add = async (product1) => await db.Products.create(product1);
+exports.repoProductByName = async (manager, nameproduct) =>
+  await db.Products.findAll({
+    where: {
+      manager: manager,
+      nameproduct: nameproduct,
+    },
+  });
 
-exports.update = async (id, product1) =>
-  await db.Products.update(product1, {
+
+exports.repoAddProduct = async (product1) => await db.Products.create(product1);
+
+exports.repoUpdateProduct = async (id, admin1) =>
+  await db.Products.update(admin1, {
     where: {
       id: id,
     },
   });
 
-exports.remove = async (id) =>
+exports.repoRemoveProduct = async (manager, id) =>
   await db.Products.destroy({
     where: {
+      manager: manager,
       id: id,
     },
   });

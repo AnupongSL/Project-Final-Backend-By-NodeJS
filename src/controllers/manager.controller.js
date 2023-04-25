@@ -34,7 +34,7 @@ exports.loginManager = async (req, res) => {
 
 exports.addManager = async (req, res) => {
   const result = await managerService.servUnEm(req.body.username, req.body.email)
-  if(result !== ''){
+  if(result != ''){
     res.status(500).json("username หรือ email ของท่านมีผู้อื่นใช้ไปแล้ว กรุณาใช้ username หรือ email อื่น");
   } else {
   res.status(201).json(await managerService.servAdd(req.body));
