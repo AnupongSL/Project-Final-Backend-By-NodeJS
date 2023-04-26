@@ -22,15 +22,15 @@ exports.getManagerUsernameEmail = async (req, res) => {
   }
 }
 
-exports.checkToken = async (req, res) =>  {
-  res.json("The token is vailable.");
+exports.checkToken = async (req, res) => {
+  res.json({msg: "true"})
   return true;
 }
 exports.loginManager = async (req, res) => {
-  const  {username,  password} = req.body
+  const  {username, password} = req.body
   const token = await managerService.servLogin(username, password)
   if(!token){
-    res.status(401).json()
+    res.status(401).json('ไม่พบผู้ใช้งานในระบบ')
     return
   }
   res.json({token})

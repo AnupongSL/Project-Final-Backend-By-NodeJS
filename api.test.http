@@ -12,11 +12,13 @@
 
 @bearerToken = Bearer {{login.response.body.token}}
 
+@bearerTokenH = Bearer {{login.response.headers.token}}
+
 GET {{user_api}}/getmanager HTTP/1.1
 ###
 
 GET {{user_api}}/checktoken HTTP/1.1
-Authorization: {{bearerToken}}
+Authorization: {{bearerTokenH}}
 ###
 
 GET {{user_api}}/getmanager/2 HTTP/1.1

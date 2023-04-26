@@ -8,7 +8,7 @@ const signOptions = {
     algorithm: 'RS256'
 }
 
-const generateToken = (payload) => jwt.sign(payload, privateKey, {...signOptions, expiresIn: '10s'})
+const generateToken = (payload) => jwt.sign(payload, privateKey, {...signOptions, expiresIn: '300s'})
 
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers['authorization']
@@ -20,8 +20,8 @@ const verifyToken = (req, res, next) => {
 
     jwt.verify(token, publicKey, signOptions, (err, decode) => {
         if (err) {
-            res.status(401).json("The token is unavailable.")
-            return false;
+            res.status(401).json()
+            return
         }
         req.sub = decode.sub
         req.role = decode.role
