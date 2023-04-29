@@ -18,4 +18,4 @@ router.put('/editmanager',jwt.verifyToken, managerController.updateManager)
 
 router.delete('/deletemanager/:id', managerController.deleteManager)
 
-module.exports = router
+module.exports = router 

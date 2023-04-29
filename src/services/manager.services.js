@@ -1,6 +1,7 @@
 const managerRepository = require("../repositories/manager.repositories");
 const bcrypt = require("bcryptjs");
 const jwt = require("../middleware/jwt");
+const { response } = require("express");
 
 exports.servAll = async () => await managerRepository.repoAll();
 
@@ -12,16 +13,19 @@ exports.servUnEm = async (username, email) =>
 exports.servLogin = async (username, password) => {
   const result = await managerRepository.repoUsername(username);
   if (result != "") {
-    const myArray = result;
-    const passwordA = myArray[0]["password"];
-    const role = myArray[0]["role"];
+    const passwordA = result[0]["password"];
+    const role = result[0]["role"];
     if (passwordA == password) {
       const payload = {
         sub: username,
         role: role,
       };
       return jwt.generateToken(payload);
+    } else {
+      return { message: "รหัสผ่านไม่ถูกต้อง" };
     }
+  } else {
+    return { message: "กรุณากรอกยูสเซอร์ให้ถูกต้อง" };
   }
 };
 

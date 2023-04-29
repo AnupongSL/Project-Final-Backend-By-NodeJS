@@ -13,7 +13,7 @@ app.use(cors());
 
 app.use(require("./src/routers/routes"));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const env = process.env.NODE_ENV || "development";
 
 app.listen(port, () => {
