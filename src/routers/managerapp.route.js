@@ -5,7 +5,7 @@ router.get('/getmanagerapp', managerAppController.getManager)
 
 router.get('/getmanagerapp/:id', managerAppController.getManagerByID)
 
-router.get('/getmanagerappbyusername', managerAppController.getManagerUsername)
+router.post('/getmanagerappbyusername', managerAppController.getManagerUsername)
 
 router.put('/editmanagerapp/:id', managerAppController.updateByManagerApp)
 
