@@ -10,6 +10,8 @@ exports.servByID = async (id) => await managerRepository.repoByID(id);
 exports.servUnEm = async (username, email) =>
   await managerRepository.repoUnEm(username, email);
 
+exports.servUsername = async (username) => await managerRepository.repoUsername(username);
+
 exports.servLogin = async (username, password) => {
   const result = await managerRepository.repoUsername(username);
   if (result != "") {

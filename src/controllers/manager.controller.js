@@ -13,6 +13,15 @@ exports.getManagerByID = async (req, res) => {
   }
 };
 
+exports.getManagerUsername = async (req, res) => {
+  const result = await managerService.servUsername(req.body.username)
+  if(result){
+    res.json(result)
+  } else {
+    res.status(200).json({msg: "ไม่พบข้อมูล"})
+  }
+}
+
 exports.getManagerUsernameEmail = async (req, res) => {
   const result = await managerService.servUnEm(req.body.username, req.body.email)
   if(result){
