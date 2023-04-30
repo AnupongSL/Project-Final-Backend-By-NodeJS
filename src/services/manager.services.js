@@ -49,4 +49,19 @@ exports.servUpdate = async (username, manager1) => {
   return null;
 };
 
+exports.servUpdateByManagerApp = async (id, manager1, username) => {
+  const result = await managerRepository.repoByID(id);
+  if (result) {
+    const updated = await managerRepository.repoUpdateByManagerApp(id, {
+      ...manager1,
+      role: "manager",
+      username,
+    });
+    if (updated) {
+      return await managerRepository.repoByID(id);
+    }
+  }
+  return null;
+};
+
 exports.servDelete = async (id) => await managerRepository.repoRemove(id);

@@ -66,6 +66,15 @@ exports.updateManager = async (req, res) => {
   }
 };
 
+exports.updateByManagerApp = async (req, res) => {
+  const result = await managerService.servUpdateByManagerApp(req.params.id, req.body, req.body.username);
+  if (result) {
+    res.json({msg: "แก้ไขข้อมูลเสร็จสิ้น" , Status: true});
+  } else {
+    res.status(200).json({msg: "ไม่พบข้อมูล" , Status: false});
+  }
+};
+
 exports.deleteManager = async (req, res) => {
   const result = await managerService.servDelete(req.params.id)
   if (result) {

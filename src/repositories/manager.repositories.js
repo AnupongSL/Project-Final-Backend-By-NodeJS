@@ -31,6 +31,13 @@ exports.repoUpdate = async (username, manager1) =>
     },
   });
 
+exports.repoUpdateByManagerApp = async (id, manager1) =>
+  await db.Managers.update(manager1, {
+    where: {
+      id: id,
+    },
+  });
+
 exports.repoRemove = async (id) =>
   await db.Managers.destroy({
     where: {
