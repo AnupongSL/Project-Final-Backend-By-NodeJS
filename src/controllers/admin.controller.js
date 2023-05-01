@@ -27,27 +27,29 @@ exports.addAdmin = async (req, res) => {
     req.body.usernameadmin
   );
   if (result != "") {
-    res.status(500).json("username ถูกใช้งานไปแล้ว");
+    res.status(200).json({msg:"username ถูกใช้งานไปแล้ว" , Status: false});
   } else {
+    const newData = await adminServices.servAddAdmin(req.body, req.sub)
     res
-      .status(201)
-      .json(await adminServices.servAddAdmin(req.body, req.sub));
+      .status(200)
+      .json({newData, msg: "เพิ่มข้อมูลแอดมินเรียบร้อยแล้ว" , Status: true});
   }
 };
 exports.updateAdmin = async (req, res) => {
   const result = await adminServices.servByID(req.sub, req.params.id);
   if (result) {
-    res.status(201).json(await adminServices.servUpdateAdmin(req.body, req.sub, req.params.id));
+    const dataUpdate = await adminServices.servUpdateAdmin(req.body, req.sub, req.params.id)
+    res.status(200).json({msg: "อัพเดทข้อมูลแอดมินเรียบร้อยแล้ว" , Status: true , dataUpdate});
   } else {
-    res.status(404).json({});
+    res.status(200).json({msg: "อัพเดทข้อมูลแอดมินไม่สำเร็จ" , Status: false});
   }
 };
 
 exports.deleteAdmin = async (req, res) => {
   const result = await adminServices.servDeleteAdmin(req.sub, req.params.id);
   if (result) {
-    res.status(204).json('ลบแอดมินออกจากระบบเรียบร้อยแล้ว');
+    res.status(200).json({msg: 'ลบแอดมินออกจากระบบเรียบร้อยแล้ว', Status: true});
   } else {
-    res.status(404).json({});
+    res.status(200).json({msg: 'ไม่พบข้อมูลแอดมินที่จะลบ', Status: false});
   }
 };
