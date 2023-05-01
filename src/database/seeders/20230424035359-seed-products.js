@@ -20,7 +20,7 @@ const data = [
   {
     manager: "siraphop1",
     nameproduct: "กะเพราหมูกรอบ",
-    priceproduct: "50",
+    priceproduct: 50,
     imageproduct: ""
 },
 ];

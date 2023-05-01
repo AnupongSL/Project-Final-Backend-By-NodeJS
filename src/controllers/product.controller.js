@@ -11,7 +11,7 @@ exports.getProductByID = async (req, res) => {
   if (result != "") {
     res.json(result);
   } else {
-    res.status(404).json("ไม่พบรายการอาหาร");
+    res.status(200).json("ไม่พบรายการอาหาร");
   }
 };
 
@@ -31,22 +31,28 @@ exports.addProduct = async (req, res) => {
   upload(req, res, async (error) => {
     if (error) {
       console.log(`error: ${JSON.stringify(error)}`);
-      return res.status(500).json({ message: error.message });
+      return res.status(200).json({ msg: error.message, Status: false });
     }
     const result = await productServices.servProductByName(
       req.sub,
       req.body.nameproduct
     );
     console.log(result);
-    if (result != '') {
-      res.status(500).json("ชื่อเมนูดังกล่าวถูกใช้งานไปแล้ว");
-    } else {
+    if (result != "") {
       res
-        .status(201)
-        .json(await productServices.servAddProduct(req.body, req.sub, req.file));
+        .status(200)
+        .json({ msg: "ชื่อเมนูดังกล่าวถูกใช้งานไปแล้ว", Status: false });
+    } else {
+      const newData = await productServices.servAddProduct(
+        req.body,
+        req.sub,
+        req.file
+      );
+      res.status(200).json({msg: "เพิ่มข้อมูลสินค้าแล้ว" , Status: true ,newData});
     }
   });
 };
+
 exports.updateProduct = async (req, res) => {
   upload(req, res, async (error) => {
     if (error) {
