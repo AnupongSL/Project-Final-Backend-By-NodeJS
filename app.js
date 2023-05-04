@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-app.use("/image", express.static("./images"));
+app.use("/images", express.static("./images"));
 
 app.use(express.json());
 
