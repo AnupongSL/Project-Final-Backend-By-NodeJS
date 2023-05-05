@@ -10,6 +10,8 @@
 
 @product_api  = {{url}}/product
 
+@sumproduct_api = {{url}}/sumproduct
+
 @bearerToken = Bearer {{login.response.body.token}}
 
 @bearerTokenH = Bearer {{login.response.headers.token}}
@@ -38,7 +40,7 @@ POST {{user_api}}/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "anuponga",
+    "username": "anuponga25",
     "password": "11111za"
 }
 
@@ -144,7 +146,7 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="nameproduct"
 
-กะเพราไก่ไข่ดาว12
+กะเพราไก่ไข่ดาว1
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="priceproduct"
 
@@ -177,3 +179,45 @@ Content-Type: image/png
 ###
 DELETE {{{{product_api}}}}/deleteproduct/3 HTTP/1.1
 Authorization: {{bearerToken}}
+
+/// SUM PRODUCT
+
+###
+GET {{sumproduct_api}}/sumproduct HTTP/1.1
+Authorization: {{bearerToken}}
+
+###
+GET {{sumproduct_api}}/sumproducttoday HTTP/1.1
+Authorization: {{bearerToken}}
+###
+
+GET {{sumproduct_api}}/sumproductyesterday HTTP/1.1
+Authorization: {{bearerToken}}
+###
+POST {{sumproduct_api}}/selectdate HTTP/1.1
+Authorization: {{bearerToken}}
+Content-Type: application/json
+
+{
+    "date": "2023-05-03"
+}
+
+###
+POST {{sumproduct_api}}/selectdatebetweenday HTTP/1.1
+Authorization: {{bearerToken}}
+Content-Type: application/json
+
+{
+    "datestart": "2023-05-03",
+    "datestop": "2023-05-05"
+}
+###
+POST {{sumproduct_api}}/addsumproduct HTTP/1.1
+Authorization: {{bearerToken}}
+Content-Type: application/json
+
+{
+    "manager": "anuponga25",
+    "nameproduct": "ยำไก่",
+    "priceproduct": "50"
+}
