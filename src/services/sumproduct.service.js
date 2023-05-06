@@ -4,6 +4,15 @@ const moment = require("moment");
 exports.servSumProductAll = async (usernameManager) =>
   await sumProductRepositories.repoSumProductAll(usernameManager);
 
+exports.servSumProductAll1 = async (usernameManager) => {
+  const result = await sumProductRepositories.repoSumProductAll(usernameManager);
+  if (result != "") {
+    const SumAll = await sumPrice(result);
+    return SumAll;
+  }
+  return null;
+}
+
 exports.servSumProductToday1 = async (usernameManager) => {
   const timeIn = moment();
   timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });

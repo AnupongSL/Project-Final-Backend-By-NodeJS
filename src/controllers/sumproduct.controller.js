@@ -3,6 +3,16 @@ const sumProductServices = require("../services/sumproduct.service");
 exports.getSumProductAll = async (req, res) =>
   res.json(await sumProductServices.servSumProductAll(req.sub));
 
+
+exports.SumProductAll = async (req, res) => {
+  const result = await sumProductServices.servSumProductAll1(req.sub);
+  if (result != "") {
+    res.status(200).json({ result });
+  } else {
+    res.status(200).json("ไม่พบรายการอาหาร");
+  }
+}
+
 exports.get1sumProductToday = async (req, res) => {
   const result = await sumProductServices.servSumProductToday1(req.sub);
   if (result != "") {

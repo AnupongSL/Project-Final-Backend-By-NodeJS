@@ -4,6 +4,7 @@ const sumProductController = require('../controllers/sumproduct.controller')
 
 
 router.get('/sumproduct', sumProductController.getSumProductAll)
+router.get('/sumproductall', sumProductController.SumProductAll) //ยอดขายตั้งแต่วันแรกจนถึงปัจจุบัน
 
 router.get('/getproducttoday', sumProductController.get1sumProductToday)
 router.get('/sumproducttoday', sumProductController.getsumProductToday)
