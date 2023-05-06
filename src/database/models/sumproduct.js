@@ -15,6 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Sumproducts.init({
     manager: DataTypes.STRING,
+    nameadmin: DataTypes.STRING,
+    usernameadmin: DataTypes.STRING,
     nameproduct: DataTypes.STRING,
     priceproduct: DataTypes.INTEGER
   }, {

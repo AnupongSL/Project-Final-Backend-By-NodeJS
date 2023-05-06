@@ -4,6 +4,17 @@ const moment = require("moment");
 exports.servSumProductAll = async (usernameManager) =>
   await sumProductRepositories.repoSumProductAll(usernameManager);
 
+exports.servSumProductToday1 = async (usernameManager) => {
+  const timeIn = moment();
+  timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+  const timeOut = moment();
+  return await sumProductRepositories.repoSumProduct(
+    usernameManager,
+    timeIn,
+    timeOut
+  );
+};
+
 exports.servSumProductToday = async (usernameManager) => {
   const timeIn = moment();
   timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
@@ -18,6 +29,18 @@ exports.servSumProductToday = async (usernameManager) => {
     return SumAll;
   }
   return null;
+};
+
+exports.servSumProductYesterday1 = async (usernameManager) => {
+  const timeIn = moment().subtract(1, "days");
+  timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+  const timeOut = moment().subtract(1, "days");
+  timeOut.set({ hour: 23, minute: 59, second: 59, millisecond: 0 });
+  return await sumProductRepositories.repoSumProduct(
+    usernameManager,
+    timeIn,
+    timeOut
+  );
 };
 
 exports.servSumProductYesterday = async (usernameManager) => {
@@ -35,6 +58,23 @@ exports.servSumProductYesterday = async (usernameManager) => {
     return SumAll;
   }
   return null;
+};
+
+exports.servSumProductSelect1 = async (usernameManager, date) => {
+  const time1 = moment(date);
+  const time2 = moment(date);
+  const timeIn = time1.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+  const timeOut = time2.set({
+    hour: 23,
+    minute: 59,
+    second: 59,
+    millisecond: 0,
+  });
+  return await sumProductRepositories.repoSumProduct(
+    usernameManager,
+    timeIn,
+    timeOut
+  );
 };
 
 exports.servSumProductSelect = async (usernameManager, date) => {
@@ -57,6 +97,26 @@ exports.servSumProductSelect = async (usernameManager, date) => {
     return SumAll;
   }
   return null;
+};
+
+exports.servSumProductSelectBetweenDay1 = async (
+  usernameManager,
+  datestart,
+  datestop
+) => {
+  const timeIn = moment(datestart);
+  const date = moment(datestop);
+  const timeOut = date.set({
+    hour: 23,
+    minute: 59,
+    second: 59,
+    millisecond: 0,
+  });
+  return await sumProductRepositories.repoSumProduct(
+    usernameManager,
+    timeIn,
+    timeOut
+  );
 };
 
 exports.servSumProductSelectBetweenDay = async (
@@ -84,10 +144,17 @@ exports.servSumProductSelectBetweenDay = async (
   return null;
 };
 
-exports.servAddSumproduct = async (usernameManager, sumproduct1) =>
+exports.servAddSumproduct = async (
+  usernameManager,
+  sumproduct1,
+  usernameadmin,
+  nameadmin
+) =>
   await sumProductRepositories.repoAddSumProduct({
     ...sumproduct1,
     manager: usernameManager,
+    nameadmin: nameadmin,
+    usernameadmin: usernameadmin,
   });
 
 exports.servDeleteSumProduct = async (usernameManager, id) =>
@@ -139,11 +206,13 @@ function sumPrice(result) {
       }
     }
     for (i = -1; i <= k; i++) {
-      if(i<k){
-        resultAll[i] = (`เมนูที่ ${i+1} คือ ${nproduct[i]} ขายได้ ${sum[i]} ครั้ง ราคา ${pproduct[i]} Bath! รวมเป็นเงิน ${sumpriceAll[i]} Bath`);
+      if (i < k) {
+        resultAll[i] = `เมนูที่ ${i + 1} คือ ${nproduct[i]} ขายได้ ${
+          sum[i]
+        } ครั้ง ราคา ${pproduct[i]} Bath! รวมเป็นเงิน ${sumpriceAll[i]} Bath`;
       }
-      if(i==k){
-        resultAll[i] = (`ยอดขายทั้งหมดคือ ${sumAll} Bath`);
+      if (i == k) {
+        resultAll[i] = `ยอดขายทั้งหมดคือ ${sumAll} Bath`;
       }
     }
     return resultAll;

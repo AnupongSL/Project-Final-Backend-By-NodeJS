@@ -31,6 +31,13 @@ exports.repoByUsername = async (manager, usernameadmin) =>
       usernameadmin: usernameadmin,
     },
   });
+
+exports.repoUsernameAdmin = async (usernameadmin) =>
+  await db.Admins.findAll({
+    where: {
+      usernameadmin: usernameadmin,
+    },
+  });
 exports.repoAddAdmin = async (admin1) => await db.Admins.create(admin1);
 
 exports.repoUpdate = async (id, admin1) =>

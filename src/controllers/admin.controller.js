@@ -21,6 +21,16 @@ exports.getAdminByName = async (req, res) => {
   }
 };
 
+exports.loginAdmin = async (req, res) => {
+  const  {usernameadmin, passwordadmin} = req.body
+  const token = await adminServices.servLoginAddmin(usernameadmin, passwordadmin)
+  if(!token){
+    res.status(200).json({msg:`ไม่พบแอดมิน username ${usernameadmin} ในระบบ`})
+    return
+  }
+  res.json({token})
+}
+
 exports.addAdmin = async (req, res) => {
   const result = await adminServices.servByUsernameAdmin(
     req.sub,
