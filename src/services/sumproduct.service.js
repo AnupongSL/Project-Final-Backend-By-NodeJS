@@ -10,7 +10,7 @@ exports.servSumProductAll1 = async (usernameManager) => {
     const SumAll = await sumPrice(result);
     return SumAll;
   }
-  return null;
+  return 'ไม่พบข้อมูล';
 }
 
 exports.servSumProductToday1 = async (usernameManager) => {
@@ -150,7 +150,7 @@ exports.servSumProductSelectBetweenDay = async (
     const SumAll = await sumPrice(result);
     return SumAll;
   }
-  return null;
+  return "ไม่พบข้อมูล";
 };
 
 exports.servAddSumproduct = async (
