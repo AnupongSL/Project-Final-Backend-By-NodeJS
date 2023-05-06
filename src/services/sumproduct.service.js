@@ -37,7 +37,7 @@ exports.servSumProductToday = async (usernameManager) => {
     const SumAll = await sumPrice(result);
     return SumAll;
   }
-  return null;
+  return "ไม่พบข้อมูล";
 };
 
 exports.servSumProductYesterday1 = async (usernameManager) => {
@@ -66,7 +66,7 @@ exports.servSumProductYesterday = async (usernameManager) => {
     const SumAll = await sumPrice(result);
     return SumAll;
   }
-  return null;
+  return "ไม่พบข้อมูล";
 };
 
 exports.servSumProductSelect1 = async (usernameManager, date) => {
@@ -216,12 +216,10 @@ function sumPrice(result) {
     }
     for (i = -1; i <= k; i++) {
       if (i < k) {
-        resultAll[i] = `เมนูที่ ${i + 1} คือ ${nproduct[i]} ขายได้ ${
-          sum[i]
-        } ครั้ง ราคา ${pproduct[i]} Bath! รวมเป็นเงิน ${sumpriceAll[i]} Bath`;
+        resultAll[i] = `（°ο°）~ เมนูที่ ${i + 1}ㅤคือㅤ ${nproduct[i]}ㅤขายได้ㅤ${sum[i]}ㅤครั้งㅤㅤราคาㅤ${pproduct[i]}ㅤบาทㅤㅤรวมเป็นเงินㅤ${sumpriceAll[i]}ㅤบาท`;
       }
       if (i == k) {
-        resultAll[i] = `ยอดขายทั้งหมดคือ ${sumAll} Bath`;
+        resultAll[i] = `ㅤㅤㅤ● ยอดขายทั้งหมดคือㅤ${sumAll}ㅤบาท ●`;
       }
     }
     return resultAll;
