@@ -104,6 +104,15 @@ Content-Type: application/json
 }
 
 ###
+POST {{admin_api}}/loginadmin HTTP/1.1
+Content-Type: application/json
+
+{
+    "usernameadmin": "adminpond",
+    "passwordadmin": "123456za"
+}
+
+###
 
 PUT  {{admin_api}}/updateadmin/2 HTTP/1.1
 Content-Type: application/json
@@ -185,7 +194,9 @@ Authorization: {{bearerToken}}
 ###
 GET {{sumproduct_api}}/sumproduct HTTP/1.1
 Authorization: {{bearerToken}}
-
+###
+GET {{sumproduct_api}}/getproducttoday HTTP/1.1
+Authorization: {{bearerToken}}
 ###
 GET {{sumproduct_api}}/sumproducttoday HTTP/1.1
 Authorization: {{bearerToken}}
@@ -193,8 +204,21 @@ Authorization: {{bearerToken}}
 
 GET {{sumproduct_api}}/sumproductyesterday HTTP/1.1
 Authorization: {{bearerToken}}
+
+###
+
+GET {{sumproduct_api}}/getproductyesterday HTTP/1.1
+Authorization: {{bearerToken}}
 ###
 POST {{sumproduct_api}}/selectdate HTTP/1.1
+Authorization: {{bearerToken}}
+Content-Type: application/json
+
+{
+    "date": "2023-05-03"
+}
+###
+POST {{sumproduct_api}}/getselectdate HTTP/1.1
 Authorization: {{bearerToken}}
 Content-Type: application/json
 
@@ -212,12 +236,21 @@ Content-Type: application/json
     "datestop": "2023-05-05"
 }
 ###
-POST {{sumproduct_api}}/addsumproduct HTTP/1.1
+POST {{sumproduct_api}}/getselectdatebetweenday HTTP/1.1
 Authorization: {{bearerToken}}
 Content-Type: application/json
 
 {
+    "datestart": "2023-05-03",
+    "datestop": "2023-05-05"
+}
+###
+POST {{sumproduct_api}}/addsumproduct HTTP/1.1
+Authorization: bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsIm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzM0NzM0NCwiZXhwIjoxNjg5MzQ3MzQ0fQ.LoI-xQCNE2LHvCUebJETtf6lZebQUYo0SftMO8f3mYz_CNA9n5rw3R3DHY4GV52e-op56vun3N-O4yGmaIwV4eGBduEhZa7A0rHlmAMoPAsPObcON3lLOT_K5tTtXUMVixXTaKKqHijbhNRqFCZogRgO2JxWyjGVweXsnXiqEqdRkV6tlTa0etFJKMiKeB86pxgvdjClwyLbs2I4eD88dQ01HKx38DhmeryhDBR3ckDXp16UqcyGCIkY4ydIUWuNvm_xET2fi-QrWWfvZmav6EDvCfCO9yFwjDynBJmVRgtn02FqFtXfG3NCFiC-YBRNJdtmgt07znW5Gn4rRltJdg
+Content-Type: application/json
+
+{
     "manager": "anuponga25",
-    "nameproduct": "ยำไก่",
-    "priceproduct": "50"
+    "nameproduct": "แกงเขียวหวานไก่",
+    "priceproduct": "60"
 }

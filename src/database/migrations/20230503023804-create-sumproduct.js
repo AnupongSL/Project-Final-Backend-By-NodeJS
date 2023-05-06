@@ -9,7 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      maanger: {
+      manager: {
+        type: Sequelize.STRING
+      },
+      nameadmin: {
+        type: Sequelize.STRING
+      },
+      usernameadmin: {
         type: Sequelize.STRING
       },
       nameproduct: {

@@ -92,6 +92,8 @@ exports.getSumProductSelectBetweenDay = async (req, res) => {
 };
 
 exports.addSumProduct = async (req, res) => {
+  console.log(req.usernameadmin);
+  console.log(req.nameadmin);  
   const result = await sumProductServices.servAddSumproduct(
     req.sub,
     req.usernameadmin,

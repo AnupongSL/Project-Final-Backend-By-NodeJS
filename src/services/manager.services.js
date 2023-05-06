@@ -1,7 +1,5 @@
 const managerRepository = require("../repositories/manager.repositories");
-const bcrypt = require("bcryptjs");
 const jwt = require("../middleware/jwt");
-const { response } = require("express");
 
 exports.servAll = async () => await managerRepository.repoAll();
 

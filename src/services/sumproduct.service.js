@@ -146,15 +146,15 @@ exports.servSumProductSelectBetweenDay = async (
 
 exports.servAddSumproduct = async (
   usernameManager,
+  usernameAdmin,
+  nameAdmin,
   sumproduct1,
-  usernameadmin,
-  nameadmin
 ) =>
   await sumProductRepositories.repoAddSumProduct({
-    ...sumproduct1,
     manager: usernameManager,
-    nameadmin: nameadmin,
-    usernameadmin: usernameadmin,
+    usernameadmin: usernameAdmin,
+    nameadmin:nameAdmin,
+    ...sumproduct1,
   });
 
 exports.servDeleteSumProduct = async (usernameManager, id) =>

@@ -1,4 +1,5 @@
 const adminRepositories = require("../repositories/admin.repositories");
+const jwt = require("../middleware/jwt");
 
 exports.servAdminAll = async (usernameManager) => await adminRepositories.repoAll(usernameManager);
 
