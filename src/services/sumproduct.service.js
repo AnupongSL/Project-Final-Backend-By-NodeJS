@@ -105,7 +105,7 @@ exports.servSumProductSelect = async (usernameManager, date) => {
     const SumAll = await sumPrice(result);
     return SumAll;
   }
-  return null;
+  return "ไม่พบข้อมูล โปรดตรวจสอบความถูกต้องของวันที่ที่กรอก!!";
 };
 
 exports.servSumProductSelectBetweenDay1 = async (
@@ -150,7 +150,7 @@ exports.servSumProductSelectBetweenDay = async (
     const SumAll = await sumPrice(result);
     return SumAll;
   }
-  return "ไม่พบข้อมูล";
+  return "ไม่พบข้อมูล โปรดตรวจสอบความถูกต้องของวันที่ที่กรอก!!";
 };
 
 exports.servAddSumproduct = async (
