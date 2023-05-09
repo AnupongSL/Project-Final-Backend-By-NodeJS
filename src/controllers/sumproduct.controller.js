@@ -18,7 +18,7 @@ exports.get1sumProductToday = async (req, res) => {
   if (result != "") {
     res.status(200).json({ result });
   } else {
-    res.status(200).json("ไม่พบรายการอาหาร");
+    res.status(200).json({msg:"ไม่พบรายการอาหาร" ,Status: false});
   }
 };
 
@@ -127,8 +127,8 @@ exports.deleteSumProduct = async (req, res) => {
     req.params.id
   );
   if (result) {
-    res.status(204).json("ลบเมนูอาหารที่ลูกค้าสั่งเรียบร้อยแล้ว");
+    res.status(200).json({msg: "ลบเมนูอาหารที่ลูกค้าสั่งเรียบร้อยแล้ว" , Status: true});
   } else {
-    res.status(404).json({});
+    res.status(200).json({msg: "ไม่พบเมนูอาหาร", Status: false});
   }
 };

@@ -32,7 +32,7 @@ exports.getManagerUsernameEmail = async (req, res) => {
 }
 
 exports.checkToken = async (req, res) => {
-  res.json({Status : true, msg: 'Verified', username: req.sub})
+  res.json({Status : true, msg: 'Verified', username: req.sub , role: req.role})
   return true;
 }
 
