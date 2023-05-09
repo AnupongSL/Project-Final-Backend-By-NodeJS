@@ -32,7 +32,12 @@ exports.getManagerUsernameEmail = async (req, res) => {
 }
 
 exports.checkToken = async (req, res) => {
-  res.json({Status : true, msg: 'Verified', username: req.sub , role: req.role})
+  if (req.role === "manager") {
+    res.json({Status : true, msg: 'Verified', username: req.sub , role: req.role})
+  }else {
+    res.json({Status : true, msg: 'Verified',username: req.usernameadmin, role: req.role})
+  }
+  
   return true;
 }
 
