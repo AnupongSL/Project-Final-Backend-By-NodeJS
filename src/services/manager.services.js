@@ -22,10 +22,10 @@ exports.servLogin = async (username, password) => {
       };
       return jwt.generateToken(payload);
     } else {
-      return { message: "รหัสผ่านไม่ถูกต้อง" };
+      return { message: "รหัสผ่านไม่ถูกต้อง" , Status: 0};
     }
   } else {
-    return { message: "กรุณากรอกยูสเซอร์ให้ถูกต้อง" };
+    return { message: "กรุณากรอกยูสเซอร์ให้ถูกต้อง" , Status: 1 };
   }
 };
 
