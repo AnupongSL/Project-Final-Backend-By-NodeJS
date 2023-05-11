@@ -1,6 +1,6 @@
 @base_url = http://localhost
 
-@port = 3000
+@port = 5000
 
 @url = {{base_url}}:{{port}}
 
@@ -10,17 +10,16 @@
 
 @product_api  = {{url}}/product
 
-@sumproduct_api = {{url}}/sumproduct
+@ordered_api = {{url}}/ordered
 
 @bearerToken = Bearer {{login.response.body.token}}
 
-@bearerTokenH = Bearer {{login.response.headers.token}}
 
 GET {{user_api}}/getmanager HTTP/1.1
 ###
 
 GET {{user_api}}/checktoken HTTP/1.1
-Authorization: {{bearerTokenH}}
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzc4NDU4NywiZXhwIjoxNjg2Mzc2NTg3fQ.c7mUSbnYnysOsuKxaF3KJSZx6y7UfN66XeBFxh6mTY_uz18Fs3UZ1ic85z9MVuaKWa_iNlZw1lGwtx6589e8IBGS2Rvm86Q0hoVSkCwRJ90aEEKmoRXdPngfaFp2aOCNLtUDD6p8B70Sm0_WRzxSg6HAYPvIcxXJH-I9MANH2guj0XXPdRC2FPwAV5lqQixX7xdcuJ6SQjpW3UAdmICgm-imH1czwqoFcwIReeh-YM2HyO8xSSH0h8VhxVTAhB5cdvmNFPaBNqcsukvWa8yJTsEakQ-m-tzdoPL3sD8XDAAumWUFSx0OtHbNfJ13h_w_BA1vqwoglv-801hjdDQoCA
 ###
 
 GET {{user_api}}/getmanager/2 HTTP/1.1
@@ -189,45 +188,45 @@ Content-Type: image/png
 DELETE {{{{product_api}}}}/deleteproduct/3 HTTP/1.1
 Authorization: {{bearerToken}}
 
-/// SUM PRODUCT
+/// ORDERED
 
 ###
-GET {{sumproduct_api}}/sumproduct HTTP/1.1
+GET {{ordered_api}}/sumproduct HTTP/1.1
 Authorization: {{bearerToken}}
 ###
-GET {{sumproduct_api}}/getproducttoday HTTP/1.1
-Authorization: {{bearerToken}}
+GET {{ordered_api}}/getordertoday HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
 ###
-GET {{sumproduct_api}}/sumproducttoday HTTP/1.1
-Authorization: {{bearerToken}}
-###
-
-GET {{sumproduct_api}}/sumproductyesterday HTTP/1.1
-Authorization: {{bearerToken}}
-
+GET {{ordered_api}}/sumordertoday HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
 ###
 
-GET {{sumproduct_api}}/getproductyesterday HTTP/1.1
+GET {{ordered_api}}/sumproductyesterday HTTP/1.1
 Authorization: {{bearerToken}}
-###
-POST {{sumproduct_api}}/selectdate HTTP/1.1
-Authorization: {{bearerToken}}
-Content-Type: application/json
 
-{
-    "date": "2023-05-03"
-}
 ###
-POST {{sumproduct_api}}/getselectdate HTTP/1.1
+
+GET {{ordered_api}}/getproductyesterday HTTP/1.1
+Authorization: {{bearerToken}}
+###
+POST {{ordered_api}}/selectdate HTTP/1.1
 Authorization: {{bearerToken}}
 Content-Type: application/json
 
 {
     "date": "2023-05-03"
 }
+###
+POST {{ordered_api}}/getselectdate HTTP/1.1
+Authorization: {{bearerToken}}
+Content-Type: application/json
+
+{
+    "date": "2023-05-03"
+}
 
 ###
-POST {{sumproduct_api}}/selectdatebetweenday HTTP/1.1
+POST {{ordered_api}}/selectdatebetweenday HTTP/1.1
 Authorization: {{bearerToken}}
 Content-Type: application/json
 
@@ -236,7 +235,7 @@ Content-Type: application/json
     "datestop": "2023-05-05"
 }
 ###
-POST {{sumproduct_api}}/getselectdatebetweenday HTTP/1.1
+POST {{ordered_api}}/getselectdatebetweenday HTTP/1.1
 Authorization: {{bearerToken}}
 Content-Type: application/json
 
@@ -245,12 +244,65 @@ Content-Type: application/json
     "datestop": "2023-05-05"
 }
 ###
-POST {{sumproduct_api}}/addsumproduct HTTP/1.1
-Authorization: bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsIm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzM0NzM0NCwiZXhwIjoxNjg5MzQ3MzQ0fQ.LoI-xQCNE2LHvCUebJETtf6lZebQUYo0SftMO8f3mYz_CNA9n5rw3R3DHY4GV52e-op56vun3N-O4yGmaIwV4eGBduEhZa7A0rHlmAMoPAsPObcON3lLOT_K5tTtXUMVixXTaKKqHijbhNRqFCZogRgO2JxWyjGVweXsnXiqEqdRkV6tlTa0etFJKMiKeB86pxgvdjClwyLbs2I4eD88dQ01HKx38DhmeryhDBR3ckDXp16UqcyGCIkY4ydIUWuNvm_xET2fi-QrWWfvZmav6EDvCfCO9yFwjDynBJmVRgtn02FqFtXfG3NCFiC-YBRNJdtmgt07znW5Gn4rRltJdg
+POST {{ordered_api}}/addorder HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDE0OCwiZXhwIjoxNjg2NDA2MTQ4fQ.qHQTgkeiR-A57-NbYjJA-cIVXoTnJps6lUldxdcjSAHWsYGJsNojBZMk4Y88HoVisxf2HulWevWh-MuVuio1OZZ6mY8ULdqlFxe5v7zQyhYaNMPtXi4gbLFD_XWcSx_fYNUxAFtmsvVNEhaJW-aljD1T3X6qP_WCHyMrnPBy_wcaKwKMY4FQY8HEuupLEk9J5DhkgN2jkI6QRAq8ZjchvTsJ3x-LuID0zUaFr7fe03C6TlME3Ovn68xayOwpfXtoSRc1uJWWY142EbGpdfMByddpi-hfOEVd6-Um1CWu8JatiSSIYj2BsrwzZ_28gnsAscZXMhUIvBAC8aPJ7qEzvA
 Content-Type: application/json
 
-{
-    "manager": "anuponga25",
-    "nameproduct": "แกงเขียวหวานไก่",
-    "priceproduct": "60"
-}
+ [
+
+    {
+        "menunumber": 1,
+        "nameordered": "ยำไข่เยี่ยวม้า",
+        "priceordered": 60,
+        "countordered": 1,
+        "namecustomer": "น้องฟัง"
+    }
+    ,
+    {
+        "menunumber": 2,
+        "nameordered": "แกงเขียวหวานหมา",
+        "priceordered": 60,
+        "countordered": 1,
+        "namecustomer": "น้องเอก"
+    }
+    ,
+    {
+        "menunumber": 3,
+        "nameordered": "ผัดผงกะหรี่",
+        "priceordered": 80,
+        "countordered": 3,
+        "namecustomer": "น้องอาม"
+    }
+    
+]
+
+###
+
+PUT {{ordered_api}}/updateorder/3 HTTP/1.1
+Authorization: {{bearerToken}}
+Content-Type: application/json
+
+[
+    {
+        "menunumber": "1",
+        "nameorder": "ยำไข่เยี่ยวม้า",
+        "priceorder": "60",
+        "countorder": "1"
+    }
+    ,
+    {
+        "menunumber": "2",
+        "nameorder": "แกงเขียวหวานหมา",
+        "priceorder": "60",
+        "countorder": "1"
+    }
+    ,
+    {
+        "menunumber": "3",
+        "nameorder": "ผัดผงกะหรี่",
+        "priceorder": "80",
+        "countorder": "3"
+    }
+]
+
+

@@ -13,7 +13,7 @@ const signOptions = {
 };
 
 const generateToken = (payload) =>
-  jwt.sign(payload, privateKey, { ...signOptions, expiresIn: "6000000s" });
+  jwt.sign(payload, privateKey, { ...signOptions, expiresIn: "30d" });
 
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -31,9 +31,8 @@ const verifyToken = (req, res, next) => {
       return;
     }
     req.sub = decode.sub;
-    req.role = decode.role;
     req.usernameadmin = decode.usernameadmin;
-    req.nameadmin = decode.nameadmin;
+    req.role = decode.role;
     next();
   });
 };

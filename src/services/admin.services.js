@@ -18,12 +18,10 @@ exports.servLoginAddmin = async (usernameadmin, passwordadmin) => {
       const passwordA = result[0]["passwordadmin"];
       const manager = result[0]["manager"]
       const role = result[0]["role"];
-      const nameadmin = result[0]["nameadmin"]
       if (passwordA == passwordadmin) {
         const payload = {
           sub: manager,
           usernameadmin: usernameadmin,
-          nameadmin, nameadmin,
           role: role,
         };
         return jwt.generateToken(payload);
