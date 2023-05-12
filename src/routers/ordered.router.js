@@ -3,8 +3,8 @@ const orderController = require('../controllers/ordered.controller')
 
 router.get('/getorderall', orderController.getOrderedAll)
 router.get('/sumorderall', orderController.SumOrderedAll)
-router.get('/getorderbybill', orderController.getOrderedByBill)
-router.get('/getorderbycustomer', orderController.getOrderedByCustomer)
+router.get('/getorderbybill/:bill', orderController.getOrderedByBill)
+router.post('/getorderbynamecustomer', orderController.getOrderedBynameCustomer)
 router.get('/getordertoday', orderController.getOrderedToday) //เมนูที่ขายวันนี้
 router.get('/sumordertoday', orderController.SumOrderedToday) // จัดอันดับยอดขายประจำวัน
 router.get('/getorderyesterday', orderController.GetOrderedYesterday) //เมนูที่ขายเมื่อวาน

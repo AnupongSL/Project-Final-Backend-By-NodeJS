@@ -12,6 +12,8 @@
 
 @ordered_api = {{url}}/ordered
 
+@owner_api = {{url}}/owner
+
 @bearerToken = Bearer {{login.response.body.token}}
 
 
@@ -191,61 +193,90 @@ Authorization: {{bearerToken}}
 /// ORDERED
 
 ###
-GET {{ordered_api}}/sumproduct HTTP/1.1
-Authorization: {{bearerToken}}
+GET {{ordered_api}}/getorderall HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzg1NTE5MCwiZXhwIjoxNjg2NDQ3MTkwfQ.EtIgTbx9z3LzDvhV4tIwtBZLrybxbtDqVcos-VVPdaiAvTANEMxOHSyVs3AnuCOFGYK-CRQuw8DMps8jNs1IWLu9dK8IXVqV7YgcimDkVh9qRAqeE3UTE7kHjxgIl2S2Ts2A5jyRXFJM0S01J1xZYh4TLCBUESRGpEnlXTcE4PyTEbgCuhkGIyn2UcUmNzWdX50DTIo5MxPnY8wsjGLRhk5yHB-3UBYZMaXEqOKtsCJwaHluTs5ar7krdfAivzLcOFh-zsFOiTk7T0piJPESXQxfMlofxhBiqbYZEFdkkhMoRK2mpVB8XySuwMd8oqIWmQIXwbWMFvLxppVRdbQZKQ
+###
+GET {{ordered_api}}/sumorderall HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzg1NTE5MCwiZXhwIjoxNjg2NDQ3MTkwfQ.EtIgTbx9z3LzDvhV4tIwtBZLrybxbtDqVcos-VVPdaiAvTANEMxOHSyVs3AnuCOFGYK-CRQuw8DMps8jNs1IWLu9dK8IXVqV7YgcimDkVh9qRAqeE3UTE7kHjxgIl2S2Ts2A5jyRXFJM0S01J1xZYh4TLCBUESRGpEnlXTcE4PyTEbgCuhkGIyn2UcUmNzWdX50DTIo5MxPnY8wsjGLRhk5yHB-3UBYZMaXEqOKtsCJwaHluTs5ar7krdfAivzLcOFh-zsFOiTk7T0piJPESXQxfMlofxhBiqbYZEFdkkhMoRK2mpVB8XySuwMd8oqIWmQIXwbWMFvLxppVRdbQZKQ
+###
+GET {{ordered_api}}/getorderbybill/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzg1NTE5MCwiZXhwIjoxNjg2NDQ3MTkwfQ.EtIgTbx9z3LzDvhV4tIwtBZLrybxbtDqVcos-VVPdaiAvTANEMxOHSyVs3AnuCOFGYK-CRQuw8DMps8jNs1IWLu9dK8IXVqV7YgcimDkVh9qRAqeE3UTE7kHjxgIl2S2Ts2A5jyRXFJM0S01J1xZYh4TLCBUESRGpEnlXTcE4PyTEbgCuhkGIyn2UcUmNzWdX50DTIo5MxPnY8wsjGLRhk5yHB-3UBYZMaXEqOKtsCJwaHluTs5ar7krdfAivzLcOFh-zsFOiTk7T0piJPESXQxfMlofxhBiqbYZEFdkkhMoRK2mpVB8XySuwMd8oqIWmQIXwbWMFvLxppVRdbQZKQ
+###
+GET {{ordered_api}}/sumorderall HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzg1NTE5MCwiZXhwIjoxNjg2NDQ3MTkwfQ.EtIgTbx9z3LzDvhV4tIwtBZLrybxbtDqVcos-VVPdaiAvTANEMxOHSyVs3AnuCOFGYK-CRQuw8DMps8jNs1IWLu9dK8IXVqV7YgcimDkVh9qRAqeE3UTE7kHjxgIl2S2Ts2A5jyRXFJM0S01J1xZYh4TLCBUESRGpEnlXTcE4PyTEbgCuhkGIyn2UcUmNzWdX50DTIo5MxPnY8wsjGLRhk5yHB-3UBYZMaXEqOKtsCJwaHluTs5ar7krdfAivzLcOFh-zsFOiTk7T0piJPESXQxfMlofxhBiqbYZEFdkkhMoRK2mpVB8XySuwMd8oqIWmQIXwbWMFvLxppVRdbQZKQ
+
 ###
 GET {{ordered_api}}/getordertoday HTTP/1.1
 Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+
 ###
 GET {{ordered_api}}/sumordertoday HTTP/1.1
 Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
-###
-
-GET {{ordered_api}}/sumproductyesterday HTTP/1.1
-Authorization: {{bearerToken}}
 
 ###
 
-GET {{ordered_api}}/getproductyesterday HTTP/1.1
-Authorization: {{bearerToken}}
+GET {{ordered_api}}/getorderyesterday HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
 ###
-POST {{ordered_api}}/selectdate HTTP/1.1
-Authorization: {{bearerToken}}
+
+GET {{ordered_api}}/sumorderyesterday HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+###
+
+GET {{ordered_api}}/sumorderweek HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+###
+
+GET {{ordered_api}}/sumordermonth HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+
+###
+POST {{ordered_api}}/getorderbyselect HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
 Content-Type: application/json
 
 {
-    "date": "2023-05-03"
+    "date": "2023-05-11"
 }
 ###
-POST {{ordered_api}}/getselectdate HTTP/1.1
-Authorization: {{bearerToken}}
+POST {{ordered_api}}/getorderbynamecustomer HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
 Content-Type: application/json
 
 {
-    "date": "2023-05-03"
+    "namecustomer": "น้องฟัง"
+}
+###
+POST {{ordered_api}}/sumorderbyselect HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Content-Type: application/json
+
+{
+    "date": "2023-05-11"
 }
 
 ###
-POST {{ordered_api}}/selectdatebetweenday HTTP/1.1
-Authorization: {{bearerToken}}
+POST {{ordered_api}}/getorderbyselectbetweenday HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
 Content-Type: application/json
 
 {
     "datestart": "2023-05-03",
-    "datestop": "2023-05-05"
+    "datestop": "2023-05-12"
 }
 ###
-POST {{ordered_api}}/getselectdatebetweenday HTTP/1.1
-Authorization: {{bearerToken}}
+POST {{ordered_api}}/sumorderbyselectbetweenday HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
 Content-Type: application/json
 
 {
     "datestart": "2023-05-03",
-    "datestop": "2023-05-05"
+    "datestop": "2023-05-12"
 }
+
 ###
 POST {{ordered_api}}/addorder HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDE0OCwiZXhwIjoxNjg2NDA2MTQ4fQ.qHQTgkeiR-A57-NbYjJA-cIVXoTnJps6lUldxdcjSAHWsYGJsNojBZMk4Y88HoVisxf2HulWevWh-MuVuio1OZZ6mY8ULdqlFxe5v7zQyhYaNMPtXi4gbLFD_XWcSx_fYNUxAFtmsvVNEhaJW-aljD1T3X6qP_WCHyMrnPBy_wcaKwKMY4FQY8HEuupLEk9J5DhkgN2jkI6QRAq8ZjchvTsJ3x-LuID0zUaFr7fe03C6TlME3Ovn68xayOwpfXtoSRc1uJWWY142EbGpdfMByddpi-hfOEVd6-Um1CWu8JatiSSIYj2BsrwzZ_28gnsAscZXMhUIvBAC8aPJ7qEzvA
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzg1NTE5MCwiZXhwIjoxNjg2NDQ3MTkwfQ.EtIgTbx9z3LzDvhV4tIwtBZLrybxbtDqVcos-VVPdaiAvTANEMxOHSyVs3AnuCOFGYK-CRQuw8DMps8jNs1IWLu9dK8IXVqV7YgcimDkVh9qRAqeE3UTE7kHjxgIl2S2Ts2A5jyRXFJM0S01J1xZYh4TLCBUESRGpEnlXTcE4PyTEbgCuhkGIyn2UcUmNzWdX50DTIo5MxPnY8wsjGLRhk5yHB-3UBYZMaXEqOKtsCJwaHluTs5ar7krdfAivzLcOFh-zsFOiTk7T0piJPESXQxfMlofxhBiqbYZEFdkkhMoRK2mpVB8XySuwMd8oqIWmQIXwbWMFvLxppVRdbQZKQ
 Content-Type: application/json
 
  [
@@ -278,31 +309,53 @@ Content-Type: application/json
 
 ###
 
-PUT {{ordered_api}}/updateorder/3 HTTP/1.1
-Authorization: {{bearerToken}}
+DELETE {{ordered_api}}/deleteordered/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzg1NTE5MCwiZXhwIjoxNjg2NDQ3MTkwfQ.EtIgTbx9z3LzDvhV4tIwtBZLrybxbtDqVcos-VVPdaiAvTANEMxOHSyVs3AnuCOFGYK-CRQuw8DMps8jNs1IWLu9dK8IXVqV7YgcimDkVh9qRAqeE3UTE7kHjxgIl2S2Ts2A5jyRXFJM0S01J1xZYh4TLCBUESRGpEnlXTcE4PyTEbgCuhkGIyn2UcUmNzWdX50DTIo5MxPnY8wsjGLRhk5yHB-3UBYZMaXEqOKtsCJwaHluTs5ar7krdfAivzLcOFh-zsFOiTk7T0piJPESXQxfMlofxhBiqbYZEFdkkhMoRK2mpVB8XySuwMd8oqIWmQIXwbWMFvLxppVRdbQZKQ
+
+
+    // OWNER
+###
+GET {{owner_api}}/getownerall HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiLguK3guJnguLjguJ7guIfguKjguYwg4Liq4Li54LiV4Lij4LmA4Lil4LiCIiwidXNlcm5hbWUiOiJhbnBvbmdzdXRsZWsiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2ODM4NjI1MjAsImV4cCI6MTY4NjQ1NDUyMH0.YaV7W6d0ne00HVmn58TJ1mzqQgEnyc5m3a08YBlJraFdZCnR6D3eR8y8nF18a0Tm8B0wAWPj7LwATq8wDUpGFZMH0pQ3B6CV9pOUVwSEF1ZLbvcZwo9GGrT4ZD4QmK5iVqFNE0TEmV_my52yzBlZ1AgCTUkdov4-21YPIo1ARIwGkaH-xAhi92Sp8qlH_7cAlOWUBVs6DAbXZYhovx0Lc1v_GSA-srVXBN8e1quUbNwafpzRH62bPjTVRhcusZbGcBI-ZYsNhpZFvSmHrktNdg_X5aHk6W7BWB_e3Q5amrMZ9_6EHDE6TV5zu3DWI8_SwxGjjTW8T3qF22XW1gmw0Q
+
+###
+POST {{owner_api}}/loginowner HTTP/1.1
 Content-Type: application/json
 
-[
-    {
-        "menunumber": "1",
-        "nameorder": "ยำไข่เยี่ยวม้า",
-        "priceorder": "60",
-        "countorder": "1"
-    }
-    ,
-    {
-        "menunumber": "2",
-        "nameorder": "แกงเขียวหวานหมา",
-        "priceorder": "60",
-        "countorder": "1"
-    }
-    ,
-    {
-        "menunumber": "3",
-        "nameorder": "ผัดผงกะหรี่",
-        "priceorder": "80",
-        "countorder": "3"
-    }
-]
+{
+    "username": "adminpond",
+    "password": "123456za"
+}
 
 
+
+###
+POST {{owner_api}}/addowner HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiLguK3guJnguLjguJ7guIfguKjguYwg4Liq4Li54LiV4Lij4LmA4Lil4LiCIiwidXNlcm5hbWUiOiJhbnBvbmdzdXRsZWsiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2ODM4NjI1MjAsImV4cCI6MTY4NjQ1NDUyMH0.YaV7W6d0ne00HVmn58TJ1mzqQgEnyc5m3a08YBlJraFdZCnR6D3eR8y8nF18a0Tm8B0wAWPj7LwATq8wDUpGFZMH0pQ3B6CV9pOUVwSEF1ZLbvcZwo9GGrT4ZD4QmK5iVqFNE0TEmV_my52yzBlZ1AgCTUkdov4-21YPIo1ARIwGkaH-xAhi92Sp8qlH_7cAlOWUBVs6DAbXZYhovx0Lc1v_GSA-srVXBN8e1quUbNwafpzRH62bPjTVRhcusZbGcBI-ZYsNhpZFvSmHrktNdg_X5aHk6W7BWB_e3Q5amrMZ9_6EHDE6TV5zu3DWI8_SwxGjjTW8T3qF22XW1gmw0Q
+Content-Type: application/json
+
+{
+
+    "namemanagerapp": "ฟัง",
+    "username": "adminpond",
+    "password": "123456za",
+    "email": "adminaek@gmail.com",
+    "mobile": "0955786621"
+
+}
+###
+
+PUT {{owner_api}}/updateowner/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiLguK3guJnguLjguJ7guIfguKjguYwg4Liq4Li54LiV4Lij4LmA4Lil4LiCIiwidXNlcm5hbWUiOiJhbnBvbmdzdXRsZWsiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2ODM4NjI1MjAsImV4cCI6MTY4NjQ1NDUyMH0.YaV7W6d0ne00HVmn58TJ1mzqQgEnyc5m3a08YBlJraFdZCnR6D3eR8y8nF18a0Tm8B0wAWPj7LwATq8wDUpGFZMH0pQ3B6CV9pOUVwSEF1ZLbvcZwo9GGrT4ZD4QmK5iVqFNE0TEmV_my52yzBlZ1AgCTUkdov4-21YPIo1ARIwGkaH-xAhi92Sp8qlH_7cAlOWUBVs6DAbXZYhovx0Lc1v_GSA-srVXBN8e1quUbNwafpzRH62bPjTVRhcusZbGcBI-ZYsNhpZFvSmHrktNdg_X5aHk6W7BWB_e3Q5amrMZ9_6EHDE6TV5zu3DWI8_SwxGjjTW8T3qF22XW1gmw0Q
+Content-Type: application/json
+
+{
+    "namemanagerapp": "เอก",
+    "username": "adminpond",
+    "password": "123456za",
+    "email": "adminaek@gmail.com",
+    "mobile": "0955786621"
+}
+###
+DELETE {{owner_api}}/deleteowner/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiLguK3guJnguLjguJ7guIfguKjguYwg4Liq4Li54LiV4Lij4LmA4Lil4LiCIiwidXNlcm5hbWUiOiJhbnBvbmdzdXRsZWsiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2ODM4NjI1MjAsImV4cCI6MTY4NjQ1NDUyMH0.YaV7W6d0ne00HVmn58TJ1mzqQgEnyc5m3a08YBlJraFdZCnR6D3eR8y8nF18a0Tm8B0wAWPj7LwATq8wDUpGFZMH0pQ3B6CV9pOUVwSEF1ZLbvcZwo9GGrT4ZD4QmK5iVqFNE0TEmV_my52yzBlZ1AgCTUkdov4-21YPIo1ARIwGkaH-xAhi92Sp8qlH_7cAlOWUBVs6DAbXZYhovx0Lc1v_GSA-srVXBN8e1quUbNwafpzRH62bPjTVRhcusZbGcBI-ZYsNhpZFvSmHrktNdg_X5aHk6W7BWB_e3Q5amrMZ9_6EHDE6TV5zu3DWI8_SwxGjjTW8T3qF22XW1gmw0Q

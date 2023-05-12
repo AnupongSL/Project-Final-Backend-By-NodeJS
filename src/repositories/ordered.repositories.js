@@ -8,11 +8,15 @@ exports.repoOrderedAll = async (manager) =>
     },
   });
 
-exports.repoOrderedByBill = async (manager, billedit) =>
+exports.repoOrderedByBill = async (manager, billedit, timeIn, timeOut) =>
   await db.Orders.findAll({
     where: {
       manager: manager,
       billnumber: billedit,
+      createat: {
+        [Op.gt]: timeIn,
+        [Op.lt]: timeOut,
+      },
     },
   });
 
@@ -45,10 +49,14 @@ exports.repoUpdateOrdered = async (billedit, ordered, menu) =>
     },
   });
 
-exports.repoRemoveOrdered = async (manager, billedit) =>
+exports.repoRemoveOrdered = async (manager, billedit, timeIn, timeOut) =>
   await db.Orders.destroy({
     where: {
       manager: manager,
       billnumber: billedit,
+      createat: {
+        [Op.gt]: timeIn,
+        [Op.lt]: timeOut,
+      },
     },
   });

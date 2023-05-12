@@ -4,17 +4,12 @@ var bill = 0;
 exports.getOrderedAll = async (req, res) =>
   res.json(await orderedServices.servGetOrderedAll(req.sub));
 
-exports.getOrderedByBill = async (req, res) => {
-  const result = await orderedServices.servGetOrderedToday(req.sub);
-  if (result) {
-    res.json(
-      await orderedServices.servGetOrderedByBill(req.sub, req.params.bill)
-    );
-  } else {
-    res.status(200).json("ไม่พบรายการอาหาร");
-  }
-};
-exports.getOrderedByCustomer = async (req, res) => {
+exports.getOrderedByBill = async (req, res) =>
+  res.json(
+    await orderedServices.servGetOrderedByBill(req.sub, req.params.bill)
+  );
+
+exports.getOrderedBynameCustomer = async (req, res) => {
   const result = await orderedServices.servGetOrderedByCustomer(
     req.sub,
     req.body.namecustomer
@@ -165,21 +160,16 @@ exports.AddOrdered = async (req, res) => {
 };
 
 exports.DeleteOrdered = async (req, res) => {
-  const dataordered = await orderedServices.servGetOrderedToday(req.sub);
-  if (dataordered) {
-    const result = await orderedServices.servDeleteOrdered(
-      req.sub,
-      req.params.bill
-    );
-    if (result) {
-      res.status(200).json({
-        msg: `ลบออเดอร์ที่ ${req.params.bill} เรียบร้อยแล้ว`,
-        Status: true,
-      });
-    } else {
-      res.status(200).json({ msg: "ไม่พบเมนูอาหาร", Status: false });
-    }
+  const result = await orderedServices.servDeleteOrdered(
+    req.sub,
+    req.params.bill
+  );
+  if (result) {
+    res.status(200).json({
+      msg: `ลบออเดอร์ที่ ${req.params.bill} เรียบร้อยแล้ว`,
+      Status: true,
+    });
   } else {
-    res.status(200).json("ไม่พบรายการอาหาร");
+    res.status(200).json({ msg: "ไม่พบเมนูอาหาร", Status: false });
   }
 };
