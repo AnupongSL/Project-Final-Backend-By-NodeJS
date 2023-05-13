@@ -5,14 +5,9 @@ exports.servGetOrderedAll = async (usernameManager) =>
   await orderRepositories.repoOrderedAll(usernameManager);
 
 exports.servGetOrderedByBill = async (usernameManager, billedit) => {
-  const timeIn = moment();
-  timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
-  const timeOut = moment();
   return await orderRepositories.repoOrderedByBill(
     usernameManager,
     billedit,
-    timeIn,
-    timeOut
   );
 };
 
@@ -219,14 +214,9 @@ exports.servAddOrdered = async (
 };
 
 exports.servDeleteOrdered = async (usernameManager, billedit) =>{
-  const timeIn = moment();
-  timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
-  const timeOut = moment();
   return await orderRepositories.repoRemoveOrdered(
     usernameManager,
-    billedit,
-    timeIn,
-    timeOut
+    billedit
   );
 }
 

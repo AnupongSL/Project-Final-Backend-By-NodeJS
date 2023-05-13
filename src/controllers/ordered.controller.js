@@ -137,13 +137,8 @@ exports.SumOrderedBySelectBetweenDay = async (req, res) => {
 };
 
 exports.AddOrdered = async (req, res) => {
-  const ordered = await orderedServices.servGetOrderedToday(req.sub);
-  if (ordered.length == 0) {
-    bill = 1;
-  } else {
-    bill = ordered[ordered.length - 1]["billnumber"] + 1;
-  }
   var data = [];
+  bill +=1;
   data = req.body;
   for (let i = 0; i < req.body.length; i++) {
     await orderedServices.servAddOrdered(
@@ -153,6 +148,7 @@ exports.AddOrdered = async (req, res) => {
       data[i]
     );
   }
+
   res.status(200).json({
     msg: "เพิ่มข้อมูลที่ลูกค้าสั่งเรียบร้อยแล้ว",
     Status: true,
