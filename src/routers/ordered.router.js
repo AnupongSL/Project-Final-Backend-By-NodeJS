@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const orderController = require('../controllers/ordered.controller')
 
-router.get('/getorderall', orderController.getOrderedAll)
+router.get('/getorderall', orderController.getOrderedAll) 
 router.get('/sumorderall', orderController.SumOrderedAll)
 router.get('/getorderbybill/:bill', orderController.getOrderedByBill)
 router.post('/getorderbynamecustomer', orderController.getOrderedBynameCustomer)

@@ -308,7 +308,8 @@ function sumPrice(result) {
         }ㅤครั้ง ราคาㅤ${price[i]}ㅤบาทㅤㅤรวมเป็นเงินㅤ${sumpriceAll[i]}ㅤบาท`;
       }
       if (i == k) {
-        resultAll[i] = `ㅤㅤㅤ● ยอดขายทั้งหมดคือㅤ${sumAll}ㅤบาท ●`;
+        resultAll[i] = `ㅤㅤㅤ● ยอดขายทั้งหมดคือ ${sumAll.toLocaleString()} บาท ●`;
+
       }
     }
     return resultAll;
