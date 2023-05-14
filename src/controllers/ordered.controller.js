@@ -22,9 +22,10 @@ exports.getOrderedBynameCustomer = async (req, res) => {
 };
 
 exports.SumOrderedAll = async (req, res) => {
-  const result = await orderedServices.servSumOrderedAll(req.sub);
-  if (result != "") {
-    res.status(200).json({ result });
+  const { name, price, sumpriceAll, sumAll } =
+    await orderedServices.servSumOrderedAll(req.sub);
+  if (name != "") {
+    res.status(200).json({ name, price, sumpriceAll, sumAll });
   } else {
     res.status(200).json("ไม่พบรายการอาหาร");
   }
@@ -40,13 +41,22 @@ exports.getOrderedToday = async (req, res) => {
 };
 
 exports.SumOrderedToday = async (req, res) => {
-  const result = await orderedServices.servSumOrderedToday(req.sub);
-  if (result != "") {
-    res.status(200).json({ result });
+  const { name, price, sumpriceAll, sumAll } =
+    await orderedServices.servSumOrderedToday(req.sub);
+  if (name != "") {
+    res.status(200).json({ name, price, sumpriceAll, sumAll });
   } else {
     res.status(200).json("ไม่พบรายการอาหาร");
   }
 };
+// exports.SumOrderedToday = async (req, res) => {
+//   const result = await orderedServices.servSumOrderedToday(req.sub);
+//   if (result != "") {
+//     res.status(200).json({ result });
+//   } else {
+//     res.status(200).json("ไม่พบรายการอาหาร");
+//   }
+// };
 
 exports.GetOrderedYesterday = async (req, res) => {
   const result = await orderedServices.servGetOrderedYesterday(req.sub);
@@ -58,27 +68,30 @@ exports.GetOrderedYesterday = async (req, res) => {
 };
 
 exports.SumOrderedYesterday = async (req, res) => {
-  const result = await orderedServices.servSumOrderedYesterday(req.sub);
-  if (result != "") {
-    res.status(200).json({ result });
+  const { name, price, sumpriceAll, sumAll } =
+    await orderedServices.servSumOrderedYesterday(req.sub);
+  if (name != "") {
+    res.status(200).json({ name, price, sumpriceAll, sumAll });
   } else {
     res.status(200).json("ไม่พบรายการอาหาร");
   }
 };
 
 exports.SumOrderedWeek = async (req, res) => {
-  const result = await orderedServices.servSumOrderedWeek(req.sub);
-  if (result != "") {
-    res.status(200).json({ result });
+  const { name, price, sumpriceAll, sumAll } =
+    await orderedServices.servSumOrderedWeek(req.sub);
+  if (name != "") {
+    res.status(200).json({ name, price, sumpriceAll, sumAll });
   } else {
     res.status(200).json("ไม่พบรายการอาหาร");
   }
 };
 
 exports.SumOrderedMonth = async (req, res) => {
-  const result = await orderedServices.servSumOrderedMonth(req.sub);
-  if (result != "") {
-    res.status(200).json({ result });
+  const { name, price, sumpriceAll, sumAll } =
+    await orderedServices.servSumOrderedMonth(req.sub);
+  if (name != "") {
+    res.status(200).json({ name, price, sumpriceAll, sumAll });
   } else {
     res.status(200).json("ไม่พบรายการอาหาร");
   }
@@ -97,12 +110,10 @@ exports.GetOrderedBySelect = async (req, res) => {
 };
 
 exports.SumOrderedBySelect = async (req, res) => {
-  const result = await orderedServices.servSumOrderedBySelect(
-    req.sub,
-    req.body.date
-  );
-  if (result != "") {
-    res.status(200).json({ result });
+  const { name, price, sumpriceAll, sumAll } =
+    await orderedServices.servSumOrderedBySelect(req.sub, req.body.date);
+  if (name != "") {
+    res.status(200).json({ name, price, sumpriceAll, sumAll });
   } else {
     res.status(200).json("ไม่พบรายการอาหาร");
   }
@@ -124,21 +135,27 @@ exports.GetOrderedBySelectBetweenDay = async (req, res) => {
 
 exports.SumOrderedBySelectBetweenDay = async (req, res) => {
   const { datestart, datestop } = req.body;
-  const result = await orderedServices.servSumOrderedBySelectBetweenDay(
-    req.sub,
-    datestart,
-    datestop
-  );
-  if (result != "") {
-    res.status(200).json({ result });
+  const { name, price, sumpriceAll, sumAll } =
+    await orderedServices.servSumOrderedBySelectBetweenDay(
+      req.sub,
+      datestart,
+      datestop
+    );
+  if (name != "") {
+    res.status(200).json({ name, price, sumpriceAll, sumAll });
   } else {
-    res.status(200).json("ไม่พบรายการอาหาร");
+    res.status(200).json({ msg: "ไม่พบรายการอาหาร", Status: false });
   }
 };
 
 exports.AddOrdered = async (req, res) => {
+  const orered = await orderedServices.servGetOrderedAll(req.sub);
+  if (orered.length == 0) {
+    bill = 1;
+  } else {
+    bill = orered[orered.length - 1]["billnumber"] + 1;
+  }
   var data = [];
-  bill +=1;
   data = req.body;
   for (let i = 0; i < req.body.length; i++) {
     await orderedServices.servAddOrdered(
