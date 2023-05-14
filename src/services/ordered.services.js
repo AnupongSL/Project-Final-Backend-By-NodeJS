@@ -5,10 +5,7 @@ exports.servGetOrderedAll = async (usernameManager) =>
   await orderRepositories.repoOrderedAll(usernameManager);
 
 exports.servGetOrderedByBill = async (usernameManager, billedit) => {
-  return await orderRepositories.repoOrderedByBill(
-    usernameManager,
-    billedit,
-  );
+  return await orderRepositories.repoOrderedByBill(usernameManager, billedit);
 };
 
 exports.servGetOrderedByCustomer = async (usernameManager, namecustomer) =>
@@ -17,8 +14,8 @@ exports.servGetOrderedByCustomer = async (usernameManager, namecustomer) =>
 exports.servSumOrderedAll = async (usernameManager) => {
   const result = await orderRepositories.repoOrderedAll(usernameManager);
   if (result != "") {
-    const SumAll = await sumPrice(result);
-    return SumAll;
+    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
+    return { name, price, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล";
 };
@@ -44,8 +41,8 @@ exports.servSumOrderedToday = async (usernameManager) => {
     timeOut
   );
   if (result != "") {
-    const SumAll = await sumPrice(result);
-    return SumAll;
+    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
+    return { name, price, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล โปรดตรวจสอบความถูกต้องของวันที่ที่กรอก!!";
 };
@@ -73,8 +70,8 @@ exports.servSumOrderedYesterday = async (usernameManager) => {
     timeOut
   );
   if (result != "") {
-    const SumAll = await sumPrice(result);
-    return SumAll;
+    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
+    return { name, price, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล";
 };
@@ -89,8 +86,8 @@ exports.servSumOrderedWeek = async (usernameManager) => {
     timeOut
   );
   if (result != "") {
-    const SumAll = await sumPrice(result);
-    return SumAll;
+    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
+    return { name, price, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล";
 };
@@ -106,8 +103,8 @@ exports.servSumOrderedMonth = async (usernameManager) => {
     timeOut
   );
   if (result != "") {
-    const SumAll = await sumPrice(result);
-    return SumAll;
+    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
+    return { name, price, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล";
 };
@@ -145,8 +142,8 @@ exports.servSumOrderedBySelect = async (usernameManager, date) => {
     timeOut
   );
   if (result != "") {
-    const SumAll = await sumPrice(result);
-    return SumAll;
+    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
+    return { name, price, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล โปรดตรวจสอบความถูกต้องของวันที่ที่กรอก!!";
 };
@@ -190,8 +187,8 @@ exports.servSumOrderedBySelectBetweenDay = async (
     timeOut
   );
   if (result != "") {
-    const SumAll = await sumPrice(result);
-    return SumAll;
+    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
+    return { name, price, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล โปรดตรวจสอบความถูกต้องของวันที่ที่กรอก!!";
 };
@@ -213,12 +210,9 @@ exports.servAddOrdered = async (
   }));
 };
 
-exports.servDeleteOrdered = async (usernameManager, billedit) =>{
-  return await orderRepositories.repoRemoveOrdered(
-    usernameManager,
-    billedit
-  );
-}
+exports.servDeleteOrdered = async (usernameManager, billedit) => {
+  return await orderRepositories.repoRemoveOrdered(usernameManager, billedit);
+};
 
 function sumPrice(result) {
   if (result != "") {
@@ -233,11 +227,11 @@ function sumPrice(result) {
     const priceordered = [];
     const countordered = [];
     let resultAll = [];
-    const price = []; // ราคาของแต่ละเมนู
-    const name = []; // ชื่อของแต่ละเมนู
-    const countorder = []; // นับจำนวนรายการแต่ละเมนู
-    const sumpriceAll = []; //ยอดขายแต่ละเมนู
-    var sumAll = 0; // ยอดขายทั้งหมด
+    let price = []; // ราคาของแต่ละเมนู
+    let name = []; // ชื่อของแต่ละเมนู
+    let countorder = []; // นับจำนวนรายการแต่ละเมนู
+    let sumpriceAll = []; //ยอดขายแต่ละเมนู
+    let sumAll = 0; // ยอดขายทั้งหมด
     for (i = 0; i < count; i++) {
       nameordered[i] = result[i]["nameordered"];
       priceordered[i] = result[i]["priceordered"];
@@ -290,18 +284,17 @@ function sumPrice(result) {
         }
       }
     }
+    // for (i = 0; i <= k; i++) {
+    //   if (i >= 0) {
+    //     resultAll[i] = `（°ο°）~ อันดับที่ ${i + 1} คือ ${name[i]}ㅤขายได้ㅤ${
+    //       countorder[i]
+    //     }ㅤครั้ง ราคาㅤ${price[i]}ㅤบาทㅤㅤรวมเป็นเงินㅤ${sumpriceAll[i]}ㅤบาท`;
+    //   }
+    //   if (i == k) {
+    //     resultAll[i] = `ㅤㅤㅤ● ยอดขายทั้งหมดคือ ${sumAll.toLocaleString()} บาท ●`;
 
-    for (i = 0; i <= k; i++) {
-      if (i >= 0) {
-        resultAll[i] = `（°ο°）~ อันดับที่ ${i + 1} คือ ${name[i]}ㅤขายได้ㅤ${
-          countorder[i]
-        }ㅤครั้ง ราคาㅤ${price[i]}ㅤบาทㅤㅤรวมเป็นเงินㅤ${sumpriceAll[i]}ㅤบาท`;
-      }
-      if (i == k) {
-        resultAll[i] = `ㅤㅤㅤ● ยอดขายทั้งหมดคือ ${sumAll.toLocaleString()} บาท ●`;
-
-      }
-    }
-    return resultAll;
+    //   }
+    // }
+    return { name, price, sumpriceAll, sumAll };
   }
 }
