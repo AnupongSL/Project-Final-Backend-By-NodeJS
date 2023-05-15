@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Admins.init({
     manager: DataTypes.STRING,
+    shop_name: DataTypes.STRING,
     nameadmin: DataTypes.STRING,
     phoneadmin: DataTypes.STRING,
     emailadmin: DataTypes.STRING,

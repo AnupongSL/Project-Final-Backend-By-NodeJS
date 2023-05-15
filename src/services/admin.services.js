@@ -33,11 +33,12 @@ exports.servLoginAddmin = async (usernameadmin, passwordadmin) => {
     }
   };
 
-exports.servAddAdmin = async (admin1, usernameManager) =>
+exports.servAddAdmin = async (admin1, usernameManager, shop_name) =>
   await adminRepositories.repoAddAdmin({
     ...admin1,
     role: "admin",
     manager: usernameManager,
+    shop_name: shop_name,
   });
 
 exports.servUpdateAdmin = async (admin1, usernameManager, id) => {

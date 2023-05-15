@@ -31,6 +31,7 @@ const verifyToken = (req, res, next) => {
       return;
     }
     req.sub = decode.sub;
+    req.shop_name = decode.shop_name;
     req.usernameadmin = decode.usernameadmin;
     req.role = decode.role;
     next();

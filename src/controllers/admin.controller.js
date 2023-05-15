@@ -20,6 +20,14 @@ exports.getAdminByName = async (req, res) => {
     res.status(404).json({});
   }
 };
+exports.getAdminByUsername = async (req, res) => {
+  const result = await adminServices.servByUsernameAdmin(req.sub, req.body.usernameadmin);
+  if (result !== '') {
+    res.json(result);
+  } else {
+    res.status(404).json({});
+  }
+};
 
 exports.loginAdmin = async (req, res) => {
   const  {usernameadmin, passwordadmin} = req.body
@@ -39,7 +47,7 @@ exports.addAdmin = async (req, res) => {
   if (result != "") {
     res.status(200).json({msg:"username ถูกใช้งานไปแล้ว" , Status: false});
   } else {
-    const newData = await adminServices.servAddAdmin(req.body, req.sub)
+    const newData = await adminServices.servAddAdmin(req.body, req.sub, req.shop_name)
     res
       .status(200)
       .json({newData, msg: "เพิ่มข้อมูลแอดมินเรียบร้อยแล้ว" , Status: true});
