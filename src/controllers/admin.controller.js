@@ -25,7 +25,7 @@ exports.getAdminByUsername = async (req, res) => {
   if (result !== '') {
     res.json(result);
   } else {
-    res.status(404).json({});
+    res.status(200).json({Status: false});
   }
 };
 
@@ -47,6 +47,7 @@ exports.addAdmin = async (req, res) => {
   if (result != "") {
     res.status(200).json({msg:"username ถูกใช้งานไปแล้ว" , Status: false});
   } else {
+    console.log(req.shop_name);
     const newData = await adminServices.servAddAdmin(req.body, req.sub, req.shop_name)
     res
       .status(200)
