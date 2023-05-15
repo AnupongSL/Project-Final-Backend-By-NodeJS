@@ -14,10 +14,12 @@ exports.servLogin = async (username, password) => {
   const result = await managerRepository.repoUsername(username);
   if (result != "") {
     const passwordA = result[0]["password"];
+    const shopName = result[0]["shop_name"]
     const role = result[0]["role"];
     if (passwordA == password) {
       const payload = {
         sub: username,
+        shop_name: shopName,
         role: role,
       };
       return jwt.generateToken(payload);

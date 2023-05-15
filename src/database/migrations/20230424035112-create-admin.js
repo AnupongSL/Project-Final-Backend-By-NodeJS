@@ -12,6 +12,9 @@ module.exports = {
       manager: {
         type: Sequelize.STRING
       },
+      shop_name: {
+        type: Sequelize.STRING
+      },
       nameadmin: {
         type: Sequelize.STRING
       },
