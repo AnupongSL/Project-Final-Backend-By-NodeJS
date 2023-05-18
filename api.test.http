@@ -44,17 +44,23 @@ Content-Type: application/json
     "username": "anuponga25",
     "password": "11111za"
 }
+###
+POST {{user_api}}/forget HTTP/1.1
+Content-Type: application/json
 
+{
+    "email":"kndew666@gmail.com"
+}
 ###
 POST {{user_api}}/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "อนุพงศ์ สูตรเลข",
-    "shop_name": "ร้านปันสุข",
-    "username": "anuponga25",
+    "name": "อัญชลีภรณ์",
+    "shop_name": "ร้านอัญชลีภรณ์",
+    "username": "anuponga26",
     "password": "11111za",
-    "email": "anuponga25@gmail.com",
+    "email": "kndew6667@gmail.com",
     "phone": "0871123654"
 }
 ###
@@ -66,7 +72,7 @@ Content-Type: application/json
     "name": "อนุพงศ์ สูตรเลข",
     "shop_name": "ร้านแสนบาน",
     "password": "11111za",
-    "email": "anupong@gmail.com",
+    "email": "kndew666@gmail.com",
     "phone": "0899999921"
 }
 ###
@@ -227,7 +233,32 @@ GET {{ordered_api}}/sumorderweek HTTP/1.1
 Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
 ###
 
+GET {{ordered_api}}/getorderweek HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+###
+
+GET {{ordered_api}}/getordermonth HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+
+###
+
 GET {{ordered_api}}/sumordermonth HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+###
+
+GET {{ordered_api}}/sumorderyear HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+###
+
+GET {{ordered_api}}/getorderyear HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+###
+
+GET {{ordered_api}}/sumorder2year HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+###
+
+GET {{ordered_api}}/getorder2year HTTP/1.1
 Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
 
 ###
@@ -276,7 +307,7 @@ Content-Type: application/json
 
 ###
 POST {{ordered_api}}/addorder HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NDA3MTUxNiwiZXhwIjoxNjg2NjYzNTE2fQ.OXjgzrFS26CtL5PcaP1VH5GdxJDdm0uRBtuf3WCfj683blOsOVTdL4vv37oGs4Mvc8F1ECW5Ykexjj24E-Ox-cWa19iop1GpmKGkvPt_8g4IiG84nSAWVr5I_eJik45OWdWNhLeYfM2eeGnOPCQRL-77d72_ZIBx5A-0BLQ5ACBYJmYvQr2yLQbyo-toOOaQZNAUfJRLxqBcyB7-RYSmx8CXd4dBxWKhkXqExQ3Fn6B9m1Lb2a3Kyhr8HumbDHM2tDe7ZyX6uR0j-wPQO_QNgLTkzwMtguKBEpdzQbO1T0DRn96xPqS_f0gXkfkHQ1jL_AtE7UIn5geHzuLKGNekWw
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NDQ1MjkzMywiZXhwIjoxNjg3MDQ0OTMzfQ.hbuc0nBAfw2gWYR22WII_7IiA3JYu6JkpUQS0W5fBrO1fhlrhP7HgCJMc9_NBFhs5QMevhn34Nhw4c0PZvBrUsfMYjv0Mn9vmWuF2CsT2ZeVQH2uED1zs_wSOzttsX9KPQgY9wPvPtCrB3rknYLbhkPNCNQRWna6yMpgvm3Q51iM3otcQK96RvBTN8IlLJbS3GAhN6hQdmbPl64C44bmzDb5dgA9Dr5eEvO9CgK545L-ZdQCTHweyX44kKJwAgjesYCvMbjOrzZhSpVuEHdJYIa-fAArzHZ7tGuc-9objE9Vqy44jIHsC19HkoKrZFLCP2Na5zkzlONBObZNLr-hUQ
 Content-Type: application/json
 
  [
@@ -286,7 +317,8 @@ Content-Type: application/json
         "nameordered": "ยำไข่เยี่ยวม้า",
         "priceordered": 60,
         "countordered": 1,
-        "namecustomer": "น้องฟัง"
+        "namecustomer": "น้องฟัง",
+        "tablenumber": 1
     }
     ,
     {
@@ -294,7 +326,8 @@ Content-Type: application/json
         "nameordered": "แกงเขียวหวานหมา",
         "priceordered": 60,
         "countordered": 1,
-        "namecustomer": "น้องเอก"
+        "namecustomer": "น้องเอก",
+        "tablenumber": 1
     }
     ,
     {
@@ -302,7 +335,8 @@ Content-Type: application/json
         "nameordered": "ผัดผงกะหรี่",
         "priceordered": 80,
         "countordered": 3,
-        "namecustomer": "น้องอาม"
+        "namecustomer": "น้องอาม",
+        "tablenumber": 1
     }
     
 ]

@@ -4,13 +4,20 @@ const orderController = require('../controllers/ordered.controller')
 router.get('/getorderall', orderController.getOrderedAll) 
 router.get('/sumorderall', orderController.SumOrderedAll)
 router.get('/getorderbybill/:bill', orderController.getOrderedByBill)
+router.get('/getorderbytable/:table', orderController.getOrderedByTable)
 router.post('/getorderbynamecustomer', orderController.getOrderedBynameCustomer)
 router.get('/getordertoday', orderController.getOrderedToday) //เมนูที่ขายวันนี้
 router.get('/sumordertoday', orderController.SumOrderedToday) // จัดอันดับยอดขายประจำวัน
 router.get('/getorderyesterday', orderController.GetOrderedYesterday) //เมนูที่ขายเมื่อวาน
 router.get('/sumorderyesterday', orderController.SumOrderedYesterday) // จัดอันดับยอดขายประจำวันเมื่อวาน
 router.get('/sumorderweek', orderController.SumOrderedWeek) // จัดอันดับยอดขายประจำสัปดาห์
+router.get('/getorderweek', orderController.GetOrderedWeek) //เมนูที่ขายในสัปดาห์ที่ผ่านมา
 router.get('/sumordermonth', orderController.SumOrderedMonth) //จัดอันดับยอดขายประจำเดือน
+router.get('/getordermonth', orderController.GetOrderedMonth) //เมนูที่ขายในเดือนที่ผ่านมา
+router.get('/sumorderyear', orderController.SumOrderedYear) //จัดอันดับยอดขายประจำปี
+router.get('/getorderyear', orderController.GetOrderedYear) //เมนูที่ขายในปีที่ผ่านมา
+router.get('/sumorder2year', orderController.SumOrdered2Years) //จัดอันดับยอดขายประจำ 2 ปี
+router.get('/getorder2year', orderController.GetOrdered2Years) //เมนูที่ขายใน 2 ปีที่ผ่านมา
 router.post('/getorderbyselect', orderController.GetOrderedBySelect) // เมนูที่ขายไป เลือกวัน
 router.post('/sumorderbyselect', orderController.SumOrderedBySelect) // ยอดเมนูที่ขายไป เลือกวัน
 router.post('/getorderbyselectbetweenday', orderController.GetOrderedBySelectBetweenDay) // เมนูที่ขายไป เลือกวัน...-...

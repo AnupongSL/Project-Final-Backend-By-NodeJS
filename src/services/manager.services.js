@@ -8,13 +8,17 @@ exports.servByID = async (id) => await managerRepository.repoByID(id);
 exports.servUnEm = async (username, email) =>
   await managerRepository.repoUnEm(username, email);
 
-exports.servUsername = async (username) => await managerRepository.repoUsername(username);
+exports.servByEmail = async (email) =>
+  await managerRepository.repoByEmail(email);
+
+exports.servUsername = async (username) =>
+  await managerRepository.repoUsername(username);
 
 exports.servLogin = async (username, password) => {
   const result = await managerRepository.repoUsername(username);
   if (result != "") {
     const passwordA = result[0]["password"];
-    const shopName = result[0]["shop_name"]
+    const shopName = result[0]["shop_name"];
     const role = result[0]["role"];
     if (passwordA == password) {
       const payload = {
@@ -24,10 +28,10 @@ exports.servLogin = async (username, password) => {
       };
       return jwt.generateToken(payload);
     } else {
-      return { message: "รหัสผ่านไม่ถูกต้อง" , Status: 0};
+      return { message: "รหัสผ่านไม่ถูกต้อง", Status: 0 };
     }
   } else {
-    return { message: "กรุณากรอกยูสเซอร์ให้ถูกต้อง" , Status: 1 };
+    return { message: "กรุณากรอกยูสเซอร์ให้ถูกต้อง", Status: 1 };
   }
 };
 
@@ -48,6 +52,11 @@ exports.servUpdate = async (username, manager1) => {
   }
   return null;
 };
+
+exports.servupdateToken = async (email, randomString) =>
+  await managerRepository.repoUpdateToken(email, {
+    token: randomString,
+  });
 
 exports.servUpdateByManagerApp = async (id, manager1, username) => {
   const result = await managerRepository.repoByID(id);

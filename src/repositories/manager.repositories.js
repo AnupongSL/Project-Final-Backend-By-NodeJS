@@ -21,8 +21,21 @@ exports.repoUsername = async (username) =>
       username: username,
     },
   });
+exports.repoByEmail = async (email) =>
+  await db.Managers.findAll({
+    where: {
+      email: email,
+    },
+  });
 
 exports.repoAdd = async (manager1) => await db.Managers.create(manager1);
+
+exports.repoUpdateToken = async (email, token) =>
+  await db.Managers.update(token, {
+    where: {
+      email: email,
+    },
+  });
 
 exports.repoUpdate = async (username, manager1) =>
   await db.Managers.update(manager1, {

@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     manager: DataTypes.STRING,
     usernameadmin: DataTypes.STRING,
     namecustomer: DataTypes.STRING,
+    tablenumber: DataTypes.NUMBER,
     createat: DataTypes.DATE
   }, {
     sequelize,

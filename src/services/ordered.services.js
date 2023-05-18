@@ -8,14 +8,20 @@ exports.servGetOrderedByBill = async (usernameManager, billedit) => {
   return await orderRepositories.repoOrderedByBill(usernameManager, billedit);
 };
 
+exports.servgetOrderedByTable = async (usernameManager, table) => {
+  return await orderRepositories.repogetOrderedByTable(usernameManager, table);
+};
+
 exports.servGetOrderedByCustomer = async (usernameManager, namecustomer) =>
   await orderRepositories.repoOrderedByCustomer(usernameManager, namecustomer);
 
 exports.servSumOrderedAll = async (usernameManager) => {
   const result = await orderRepositories.repoOrderedAll(usernameManager);
   if (result != "") {
-    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
-    return { name, price, sumpriceAll, sumAll };
+    const { name, price, countorder, sumpriceAll, sumAll } = await sumPrice(
+      result
+    );
+    return { name, price, countorder, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล";
 };
@@ -41,8 +47,10 @@ exports.servSumOrderedToday = async (usernameManager) => {
     timeOut
   );
   if (result != "") {
-    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
-    return { name, price, sumpriceAll, sumAll };
+    const { name, price, countorder, sumpriceAll, sumAll } = await sumPrice(
+      result
+    );
+    return { name, price, countorder, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล โปรดตรวจสอบความถูกต้องของวันที่ที่กรอก!!";
 };
@@ -70,8 +78,10 @@ exports.servSumOrderedYesterday = async (usernameManager) => {
     timeOut
   );
   if (result != "") {
-    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
-    return { name, price, sumpriceAll, sumAll };
+    const { name, price, countorder, sumpriceAll, sumAll } = await sumPrice(
+      result
+    );
+    return { name, price, countorder, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล";
 };
@@ -86,10 +96,23 @@ exports.servSumOrderedWeek = async (usernameManager) => {
     timeOut
   );
   if (result != "") {
-    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
-    return { name, price, sumpriceAll, sumAll };
+    const { name, price, countorder, sumpriceAll, sumAll } = await sumPrice(
+      result
+    );
+    return { name, price, countorder, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล";
+};
+exports.servGetOrderedWeek = async (usernameManager) => {
+  const timeIn = moment().subtract(7, "days");
+  timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+  const timeOut = moment();
+  timeOut.set({ hour: 23, minute: 59, second: 59, millisecond: 0 });
+  return await orderRepositories.repoSumOrdered(
+    usernameManager,
+    timeIn,
+    timeOut
+  );
 };
 
 exports.servSumOrderedMonth = async (usernameManager) => {
@@ -103,10 +126,82 @@ exports.servSumOrderedMonth = async (usernameManager) => {
     timeOut
   );
   if (result != "") {
-    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
-    return { name, price, sumpriceAll, sumAll };
+    const { name, price, countorder, sumpriceAll, sumAll } = await sumPrice(
+      result
+    );
+    return { name, price, countorder, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล";
+};
+exports.servGetOrderedMonth = async (usernameManager) => {
+  const timeIn = moment().subtract(30, "days");
+  timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+  const timeOut = moment();
+  timeOut.set({ hour: 23, minute: 59, second: 59, millisecond: 0 });
+  return await orderRepositories.repoSumOrdered(
+    usernameManager,
+    timeIn,
+    timeOut
+  );
+};
+exports.servSumOrderedYear = async (usernameManager) => {
+  const timeIn = moment().subtract(1, "years");
+  timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+  const timeOut = moment();
+  timeOut.set({ hour: 23, minute: 59, second: 59, millisecond: 0 });
+  const result = await orderRepositories.repoSumOrdered(
+    usernameManager,
+    timeIn,
+    timeOut
+  );
+  if (result != "") {
+    const { name, price, countorder, sumpriceAll, sumAll } = await sumPrice(
+      result
+    );
+    return { name, price, countorder, sumpriceAll, sumAll };
+  }
+  return "ไม่พบข้อมูล";
+};
+
+exports.servGetOrderedYear = async (usernameManager) => {
+  const timeIn = moment().subtract(1, "years");
+  timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+  const timeOut = moment();
+  timeOut.set({ hour: 23, minute: 59, second: 59, millisecond: 0 });
+  return await orderRepositories.repoSumOrdered(
+    usernameManager,
+    timeIn,
+    timeOut
+  );
+};
+exports.servSumOrdered2Years = async (usernameManager) => {
+  const timeIn = moment().subtract(2, "years");
+  timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+  const timeOut = moment();
+  timeOut.set({ hour: 23, minute: 59, second: 59, millisecond: 0 });
+  const result = await orderRepositories.repoSumOrdered(
+    usernameManager,
+    timeIn,
+    timeOut
+  );
+  if (result != "") {
+    const { name, price, countorder, sumpriceAll, sumAll } = await sumPrice(
+      result
+    );
+    return { name, price, countorder, sumpriceAll, sumAll };
+  }
+  return "ไม่พบข้อมูล";
+};
+exports.servGetOrdered2Years = async (usernameManager) => {
+  const timeIn = moment().subtract(2, "years");
+  timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+  const timeOut = moment();
+  timeOut.set({ hour: 23, minute: 59, second: 59, millisecond: 0 });
+  return await orderRepositories.repoSumOrdered(
+    usernameManager,
+    timeIn,
+    timeOut
+  );
 };
 
 exports.servGetOrderedBySelect = async (usernameManager, date) => {
@@ -142,8 +237,10 @@ exports.servSumOrderedBySelect = async (usernameManager, date) => {
     timeOut
   );
   if (result != "") {
-    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
-    return { name, price, sumpriceAll, sumAll };
+    const { name, price, countorder, sumpriceAll, sumAll } = await sumPrice(
+      result
+    );
+    return { name, price, countorder, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล โปรดตรวจสอบความถูกต้องของวันที่ที่กรอก!!";
 };
@@ -187,8 +284,10 @@ exports.servSumOrderedBySelectBetweenDay = async (
     timeOut
   );
   if (result != "") {
-    const { name, price, sumpriceAll, sumAll } = await sumPrice(result);
-    return { name, price, sumpriceAll, sumAll };
+    const { name, price, countorder, sumpriceAll, sumAll } = await sumPrice(
+      result
+    );
+    return { name, price, countorder, sumpriceAll, sumAll };
   }
   return "ไม่พบข้อมูล โปรดตรวจสอบความถูกต้องของวันที่ที่กรอก!!";
 };
@@ -295,6 +394,6 @@ function sumPrice(result) {
 
     //   }
     // }
-    return { name, price, sumpriceAll, sumAll };
+    return { name, price, countorder, sumpriceAll, sumAll };
   }
 }
