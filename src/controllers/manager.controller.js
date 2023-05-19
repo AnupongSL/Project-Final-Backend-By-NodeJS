@@ -1,6 +1,9 @@
 const managerService = require("../services/manager.services");
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const randomstring = require("randomstring");
+const forget = require('../configs/forget');
+const nodemailer = require("nodemailer");
 
 exports.getManager = async (req, res) => res.json(await managerService.servAll());
 
@@ -51,6 +54,63 @@ exports.loginManager = async (req, res) => {
     return
   }
   res.json({token})
+}
+
+exports.forgetPasswordManager = async (req, res) => {
+  try {
+    res.render('forget')
+  } catch (error) {
+    console.log(error.massage);
+  }
+}
+exports.forgetVerify = async (req, res) => {
+  try {
+    const email = req.body.email;
+    const userData = await managerService.servByEmail(email)
+    if(userData){
+      const randomString = randomstring.generate();
+      //console.log("ขั้นที่ 1", email)
+      await managerService.servupdateToken(email, randomString)
+      //console.log("ขั้นที่ 2", updateData)
+      name = userData[0]["name"]
+      res.json(userData)
+      sendResetPasswordMail(name, email, randomString)
+      // res.send('forget',{message: "Please check your mail to reset your password"});
+    } else {
+      res.render('forget', {message:"User email is incorrect."})
+    }
+  } catch (error) {
+    console.log(error.massage);
+  }
+}
+
+const sendResetPasswordMail = async(name, email, token) =>{
+  console.log(name, email, token);
+  console.log(forget.emailUser);
+  console.log(forget.emailPassword);
+  const transporter = nodemailer.createTransport({
+    host: "smtppro.zoho.in",
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: forget.emailUser, // generated ethereal user
+      pass: forget.emailPassword // generated ethereal password
+    },
+  });
+  const mailOptions = {
+    from: forget.emailUser,
+    to:email,
+    subject: 'For Reset Password',
+    html: '<p>Hi '+name+', please click here to <a href="http://127.0.0.1:3000/forget-password?token='+token+'"> Reset </a> your password.</a></p>'
+  }
+  transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+      console.log(error);
+    }
+    else {
+      console.log("Email has been sent:- ",info.response);
+    }
+  })
 }
 
 exports.addManager = async (req, res) => {

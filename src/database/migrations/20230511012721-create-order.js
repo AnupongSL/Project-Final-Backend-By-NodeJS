@@ -33,6 +33,9 @@ module.exports = {
       namecustomer: {
         type: Sequelize.STRING
       },
+      tablenumber: {
+        type: Sequelize.INTEGER
+      },
       createAt: {
         type: Sequelize.DATE
       },

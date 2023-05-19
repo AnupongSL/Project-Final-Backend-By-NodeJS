@@ -8,6 +8,10 @@ exports.getOrderedByBill = async (req, res) =>
   res.json(
     await orderedServices.servGetOrderedByBill(req.sub, req.params.bill)
   );
+exports.getOrderedByTable = async (req, res) =>
+  res.json(
+    await orderedServices.servgetOrderedByTable(req.sub, req.params.table)
+  );
 
 exports.getOrderedBynameCustomer = async (req, res) => {
   const result = await orderedServices.servGetOrderedByCustomer(
@@ -22,10 +26,10 @@ exports.getOrderedBynameCustomer = async (req, res) => {
 };
 
 exports.SumOrderedAll = async (req, res) => {
-  const { name, price, sumpriceAll, sumAll } =
+  const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedAll(req.sub);
   if (name != "") {
-    res.status(200).json({ name, price, sumpriceAll, sumAll });
+    res.status(200).json({ name, price, countorder, sumpriceAll, sumAll });
   } else {
     res.status(200).json("ไม่พบรายการอาหาร");
   }
@@ -41,10 +45,10 @@ exports.getOrderedToday = async (req, res) => {
 };
 
 exports.SumOrderedToday = async (req, res) => {
-  const { name, price, sumpriceAll, sumAll } =
+  const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedToday(req.sub);
   if (name != "") {
-    res.status(200).json({ name, price, sumpriceAll, sumAll });
+    res.status(200).json({ name, price, countorder, sumpriceAll, sumAll });
   } else {
     res.status(200).json("ไม่พบรายการอาหาร");
   }
@@ -68,35 +72,90 @@ exports.GetOrderedYesterday = async (req, res) => {
 };
 
 exports.SumOrderedYesterday = async (req, res) => {
-  const { name, price, sumpriceAll, sumAll } =
+  const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedYesterday(req.sub);
   if (name != "") {
-    res.status(200).json({ name, price, sumpriceAll, sumAll });
+    res.status(200).json({ name, price, countorder, sumpriceAll, sumAll });
   } else {
     res.status(200).json("ไม่พบรายการอาหาร");
   }
 };
 
+exports.GetOrderedWeek = async (req, res) => {
+  const result = await orderedServices.servGetOrderedWeek(req.sub);
+  if (result != "") {
+    res.status(200).json({ result });
+  } else {
+    res.status(200).json({ msg: "ไม่พบรายการอาหาร", Status: false });
+  }
+};
+
 exports.SumOrderedWeek = async (req, res) => {
-  const { name, price, sumpriceAll, sumAll } =
+  const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedWeek(req.sub);
   if (name != "") {
-    res.status(200).json({ name, price, sumpriceAll, sumAll });
+    res.status(200).json({ name, price, countorder, sumpriceAll, sumAll });
+  } else {
+    res.status(200).json("ไม่พบรายการอาหาร");
+  }
+};
+
+exports.GetOrderedMonth = async (req, res) => {
+  const result = await orderedServices.servGetOrderedMonth(req.sub);
+  if (result != "") {
+    res.status(200).json({ result });
   } else {
     res.status(200).json("ไม่พบรายการอาหาร");
   }
 };
 
 exports.SumOrderedMonth = async (req, res) => {
-  const { name, price, sumpriceAll, sumAll } =
+  const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedMonth(req.sub);
   if (name != "") {
-    res.status(200).json({ name, price, sumpriceAll, sumAll });
+    res.status(200).json({ name, price, countorder, sumpriceAll, sumAll });
   } else {
     res.status(200).json("ไม่พบรายการอาหาร");
   }
 };
 
+exports.GetOrderedYear = async (req, res) => {
+  const result = await orderedServices.servGetOrderedYear(req.sub);
+  if (result != "") {
+    res.status(200).json({ result });
+  } else {
+    res.status(200).json("ไม่พบรายการอาหาร");
+  }
+};
+
+exports.SumOrderedYear = async (req, res) => {
+  const { name, price, countorder, sumpriceAll, sumAll } =
+    await orderedServices.servSumOrderedYear(req.sub);
+  if (name != "") {
+    res.status(200).json({ name, price, countorder, sumpriceAll, sumAll });
+  } else {
+    res.status(200).json("ไม่พบรายการอาหาร");
+  }
+};
+
+exports.GetOrdered2Years = async (req, res) => {
+  const result = await orderedServices.servGetOrdered2Years(req.sub);
+  if (result != "") {
+    res.status(200).json({ result });
+  } else {
+    res.status(200).json("ไม่พบรายการอาหาร");
+  }
+};
+
+exports.SumOrdered2Years = async (req, res) => {
+  const { name, price, countorder, sumpriceAll, sumAll } =
+    await orderedServices.servSumOrdered2Years(req.sub);
+  if (name != "") {
+    res.status(200).json({ name, price, countorder, sumpriceAll, sumAll });
+  } else {
+    res.status(200).json("ไม่พบรายการอาหาร");
+  }
+};
 exports.GetOrderedBySelect = async (req, res) => {
   const result = await orderedServices.servGetOrderedBySelect(
     req.sub,

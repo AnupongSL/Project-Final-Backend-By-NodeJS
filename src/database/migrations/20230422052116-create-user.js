@@ -30,6 +30,10 @@ module.exports = {
       role: {
         type: Sequelize.STRING
       },
+      token: {
+        type: Sequelize.STRING,
+        defaultValue:''
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE
