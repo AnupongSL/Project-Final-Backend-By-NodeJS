@@ -5,8 +5,8 @@ const jwt = require('../middleware/jwt')
 router.get('/getadmin',jwt.verifyToken, adminController.getAdminAll);
 router.get('/getadmin/:id',jwt.verifyToken, adminController.getAdminByID);
 router.get('/getadminbyname',jwt.verifyToken, adminController.getAdminByName);
-router.get('/getadminbyusername',jwt.verifyToken, adminController.getAdminByUsername);
-router.post('/loginadmin', adminController.loginAdmin);
+router.post('/getadminbyusername',jwt.verifyToken, adminController.getAdminByUsername);
+router.post('/loginadmin', adminController.loginAdmin); 
 // router.get('/getproduct', adminController.getProductByAddmin)
 router.post('/registeradmin',jwt.verifyToken, adminController.addAdmin);
 // router.post('/addproduct', adminController.addProductByAdmin)
