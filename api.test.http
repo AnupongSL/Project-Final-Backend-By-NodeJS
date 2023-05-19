@@ -26,8 +26,8 @@ POST {{user_api}}/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "anupong",
-    "password": "11111za"
+    "username": "sukjaishop",
+    "password": "12121212"
 }
 ###
 GET {{user_api}}/checktoken HTTP/1.1
@@ -50,7 +50,7 @@ Content-Type: application/json
     "shop_name": "ร้านอนุพงศ์",
     "username": "anupong",
     "password": "11111za",
-    "email": "anupongsutlek022@gmail.com",
+    "email": "kndew666@gmail.com",
     "phone": "0871123654"
 }
 
@@ -129,10 +129,10 @@ Authorization: {{bearerTokenManager}}
 Content-Type: application/json
 
 {
-    "nameadmin": "admindew123",
+    "nameadmin": "admindew188",
     "phoneadmin": "0955786621",
-    "emailadmin": "adminaek1234@gmail.com",
-    "usernameadmin": "admindew1",
+    "emailadmin": "nongaek1@gmail.com",
+    "usernameadmin": "admindeww1",
     "passwordadmin": "123456za"
 }
 
@@ -356,13 +356,22 @@ Content-Type: application/json
 // OWNER
 ###
 GET {{user_api}}/getmanager HTTP/1.1
+###
+POST {{user_api}}/forget-password HTTP/1.1
+Content-Type: application/json
 
+{
+    "password": "123456",
+    "password2": "123456"
+}
 ###
 GET {{user_api}}/getmanager/2 HTTP/1.1
 
 ###
 GET {{user_api}}/checktoken HTTP/1.1
 Authorization: {{bearerTokenOwner}}
+###
+POST {{user_api}}/signup HTTP/1.1
 
 ###
 POST {{ordered_api}}/sumorderallbyusername HTTP/1.1
@@ -372,6 +381,16 @@ Content-Type: application/json
 {
     "username": "anupong"
 }
+###
+POST {{user_api}}/forget HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "62022901@up.ac.th"
+}
+// anupongsutlek022@gmail.com // owner
+// kndew666@gmail.com //manager
+// nongaek@gmail.com // admin
 ###
 # @name loginowner
 POST {{owner_api}}/loginowner HTTP/1.1

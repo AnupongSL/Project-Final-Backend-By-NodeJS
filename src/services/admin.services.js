@@ -12,6 +12,9 @@ exports.servByName = async (usernameManager, nameAdmin) =>
 exports.servByUsernameAdmin = async (usernameManager, usernameAdmin) =>
   await adminRepositories.repoByUsername(usernameManager, usernameAdmin);
 
+exports.servByUsernameAndEmailAdmin = async (usernameAdmin, emailAdmin) =>
+  await adminRepositories.repoByUsernameAndEmailAdmin(usernameAdmin, emailAdmin);
+
 exports.servByUsernameAdminUpdate = async (usernameAdmin) =>
   await adminRepositories.repoUsernameAdmin(usernameAdmin);
 

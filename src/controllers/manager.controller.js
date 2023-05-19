@@ -4,6 +4,10 @@ const jwt = require("jsonwebtoken");
 const randomstring = require("randomstring");
 const forget = require("../configs/forget");
 const nodemailer = require("nodemailer");
+const Mailgen = require("mailgen");
+
+let myValue;
+let roleToken;
 
 exports.getManager = async (req, res) =>
   res.json(await managerService.servAll());
@@ -75,81 +79,48 @@ exports.loginManager = async (req, res) => {
   res.json({ token });
 };
 
-exports.forgetPasswordManager = async (req, res) => {
-  try {
-    res.render("forget");
-  } catch (error) {
-    console.log(error.massage);
-  }
-};
-
 exports.forgetVerify = async (req, res) => {
   try {
     const email = req.body.email;
     const userData = await managerService.servByEmail(email);
     if (userData) {
       const randomString = randomstring.generate();
-      //console.log("ขั้นที่ 1", email)
-      await managerService.servupdateToken(email, randomString);
-      //console.log("ขั้นที่ 2", updateData)
-      name = userData[0]["name"];
-      res.json(userData);
-      sendResetPasswordMail(name, email, randomString);
-      // res.send('forget',{message: "Please check your mail to reset your password"});
+      roleToken = userData[0]["role"];
+      if(roleToken == "manager"){
+        name = userData[0]["name"];
+      } else if(roleToken == "admin"){
+        name = userData[0]["nameadmin"];
+      } else if(roleToken == "owner"){
+        name = userData[0]["namemanagerapp"];
+      }
+      const emailValue = await managerService.servupdateToken(email, randomString, roleToken);
+      if (emailValue != ""){
+        myValue = randomString;
+        forgetPassword(name, email, randomString, res);
+      } else {
+        res.render("forget", { message: "อีเมลของผู้ใช้ไม่ถูกต้อง" });        
+      }
     } else {
-      res.render("forget", { message: "User email is incorrect." });
+      res.render("forget", { message: "ไม่พบอีเมลของท่านในระบบ" });
     }
   } catch (error) {
-    console.log(error.massage);
+    // console.log(error.massage);
   }
 };
 
-const sendResetPasswordMail = async (name, email, token) => {
-  const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: forget.emailUser, // generated ethereal user
-      pass: forget.emailPassword, // generated ethereal password
-    },
-  });
-  // const mailOptions = {
-  //   from: forget.emailUser,
-  //   to:email,
-  //   subject: 'For Reset Password',
-  //   html: '<p>Hi '+name+', please click here to <a href="http://127.0.0.1:3000/forget-password?token='+token+'"> Reset </a> your password.</a></p>'
-  // }
-  let message = {
-    from: '"Fred Foo 👻" <foo@example.com>', // sender address
-    to: "bar@example.com, baz@example.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
-  };
-  transporter
-    .sendMail(message)
-    .then(() => {
-      return res
-        .status(201)
-        .json({
-          msg: "you should receive an email",
-          info: info.messageId,
-          preview: nodemailer.getTestMessageUrl(info),
-        });
-    })
-    .catch((error) => {
-      return res.status(500).json({ error });
-    });
-  // transporter.sendMail(mailOptions, function(error, info){
-  //   if(error){
-  //     console.log(error);
-  //   }
-  //   else {
-  //     console.log("Email has been sent:- ",info.response);
-  //   }
-  // })
-};
+exports.resetPassword = async (req, res) => {  
+    const password = req.body.password;
+    const password2 = req.body.password2;
+    if(password == password2){
+      // const secure_password = await securePassword(password);
+      const resetPW = await managerService.servResetPassword(myValue, password, roleToken)
+      if (resetPW) {
+        res.status(200).json({ msg: "แก้ไขรหัสผ่านเรียบร้อยแล้ว", Status: true });
+      } else {
+        res.status(200).json({ msg: "แก้ไขรหัสผ่านไม่สำเร็จ", Status: false });
+      }
+    }   
+}
 
 exports.addManager = async (req, res) => {
   const result = await managerService.servUnEm(
@@ -157,12 +128,10 @@ exports.addManager = async (req, res) => {
     req.body.email
   );
   if (result != "") {
-    res
-      .status(200)
-      .json({
-        msg: "username หรือ email ของท่านมีผู้อื่นใช้ไปแล้ว กรุณาใช้ username หรือ email อื่น",
-        Status: false,
-      });
+    res.status(200).json({
+      msg: "username หรือ email ของท่านมีผู้อื่นใช้ไปแล้ว กรุณาใช้ username หรือ email อื่น",
+      Status: false,
+    });
   } else {
     const dataAdd = await managerService.servAdd(req.body);
     res.status(200).json({ msg: "เพิ่มผู้ใช้งานแล้ว", Status: true, dataAdd });
@@ -186,3 +155,60 @@ exports.deleteManager = async (req, res) => {
     res.status(200).json({ msg: "ไม่พบข้อมูล", Status: false });
   }
 };
+
+const forgetPassword = async (name, email, token, res) => {
+  let config = {
+    service: "gmail",
+    auth: {
+      user: forget.EMAIL,
+      pass: forget.PASSWORD,
+    },
+  };
+  let MailGenerator = new Mailgen({
+    theme: "default",
+    product: {
+      name: "Mailgen",
+      link: "https://mailgen.js/",
+    },
+  });
+  let response = {
+    body: {
+      name: name,
+      intro:
+        '<p>Please click here to <a href="http://127.0.0.1:3000/forget-password?token=' +
+        token +
+        '"> Reset </a> your password.</a></p>',
+    },
+  };
+
+  let transporter = nodemailer.createTransport(config);
+
+  let mail = MailGenerator.generate(response);
+
+  let message = {
+    from: forget.EMAIL,
+    to: email,
+    subject: "Reset Password!!!",
+    html: mail,
+  };
+
+  transporter
+    .sendMail(message)
+    .then(() => {
+      res.status(201).json({
+        msg: "you should receive an email",
+      });
+    })
+    .catch((error) => {
+      res.status(201).json({ error });
+    });
+};
+
+const securePassword = async(password) => {
+  try {
+    const passwordHash = await bcrypt.hash(password, 10)
+    return passwordHash;
+  } catch (error) {
+    console.log(error.message);
+  }
+}

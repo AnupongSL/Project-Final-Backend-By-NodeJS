@@ -32,7 +32,7 @@ module.exports = {
       },
       token: {
         type: Sequelize.STRING,
-        defaultValue:''
+        defaultValue: "undefined"
       },
       created_at: {
         allowNull: false,

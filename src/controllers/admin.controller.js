@@ -41,14 +41,13 @@ exports.loginAdmin = async (req, res) => {
 }
 
 exports.addAdmin = async (req, res) => {
-  const result = await adminServices.servByUsernameAdmin(
-    req.sub,
-    req.body.usernameadmin
+  const result = await adminServices.servByUsernameAndEmailAdmin(
+    req.body.usernameadmin,
+    req.body.emailadmin,
   );
   if (result != "") {
-    res.status(200).json({msg:"username ถูกใช้งานไปแล้ว" , Status: false});
+    res.status(200).json({msg:"username หรือ email ของท่านมีผู้อื่นใช้ไปแล้ว กรุณาใช้ username หรือ email อื่น" , Status: false});
   } else {
-    console.log(req.shop_name);
     const newData = await adminServices.servAddAdmin(req.body, req.sub, req.shop_name)
     res
       .status(200)

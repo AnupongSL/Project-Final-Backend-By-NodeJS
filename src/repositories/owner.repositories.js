@@ -5,7 +5,27 @@ exports.repoDataOwner = async () => await db.Managerapps.findAll();
 exports.repoOwnerUsername = async (username) =>
   await db.Managerapps.findAll({
     where: {
-        username: username,
+      username: username,
+    },
+  });
+exports.repoByEmailOwner = async (email) =>
+  await db.Managerapps.findAll({
+    where: {
+      email: email,
+    },
+  });
+
+exports.repoUpdateTokenOwner = async (email, token) =>
+  await db.Managerapps.update(token, {
+    where: {
+      email: email,
+    },
+  });
+
+exports.repoResetPasswordOwner = async (myValue, password) =>
+  await db.Managerapps.update(password, {
+    where: {
+      token: myValue,
     },
   });
 
@@ -15,4 +35,3 @@ exports.repoUpdateOwner = async (username, owner) =>
       username: username,
     },
   });
-

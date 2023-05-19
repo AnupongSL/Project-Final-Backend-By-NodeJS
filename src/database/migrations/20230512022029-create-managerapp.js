@@ -27,6 +27,10 @@ module.exports = {
       mobile: {
         type: Sequelize.STRING
       },
+      token: {
+        type: Sequelize.STRING,
+        defaultValue: "undefined"
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE

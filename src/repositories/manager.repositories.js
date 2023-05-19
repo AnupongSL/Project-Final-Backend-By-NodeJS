@@ -22,6 +22,13 @@ exports.repoUsername = async (username) =>
     },
   });
 
+exports.repoPassword = async (secure_password) =>
+  await db.Managers.findAll({
+    where: {
+      password: secure_password,
+    },
+  });
+
 exports.repoByEmail = async (email) =>
   await db.Managers.findAll({
     where: {
@@ -35,6 +42,13 @@ exports.repoUpdateToken = async (email, token) =>
   await db.Managers.update(token, {
     where: {
       email: email,
+    },
+  });
+
+exports.repoResetPassword = async (myValue, password) =>
+  await db.Managers.update(password, {
+    where: {
+      token: myValue,
     },
   });
 
