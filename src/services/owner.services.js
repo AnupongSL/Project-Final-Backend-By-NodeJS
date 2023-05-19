@@ -1,15 +1,10 @@
 const ownerRepositories = require("../repositories/owner.repositories");
 const jwt = require("../middleware/jwt");
 
-exports.servGetOwnerAll = async () => await ownerRepositories.repoOwnerAll();
+exports.servGetOwner = async () => await ownerRepositories.repoDataOwner();
 
 exports.servUsernameOwner = async (username) =>
   await ownerRepositories.repoOwnerUsername(username);
-
-exports.servOwnerByID = async (id) => await ownerRepositories.repoOwnerID(id);
-
-exports.servAddOwner = async (owner) =>
-  await ownerRepositories.repoAddOwner({ ...owner, role: "adminapp" });
 
 exports.servLoginOwner = async (username, password) => {
   const result = await ownerRepositories.repoOwnerUsername(username);
@@ -32,13 +27,11 @@ exports.servLoginOwner = async (username, password) => {
   }
 };
 
-exports.servUpdateOwner = async (owner, id) => {
-  const updated = await ownerRepositories.repoUpdateOwner(id, { ...owner });
+exports.servUpdateOwner = async (owner, username) => {
+  const updated = await ownerRepositories.repoUpdateOwner(username, { ...owner });
   if (updated) {
-    return await ownerRepositories.repoOwnerID(id);
+    return await ownerRepositories.repoOwnerUsername(username);
   }
   return null;
 };
 
-exports.servDeleteOwner = async (id) =>
-  await ownerRepositories.repoRemoveOwner(id);

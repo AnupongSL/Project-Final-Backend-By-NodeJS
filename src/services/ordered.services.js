@@ -85,6 +85,7 @@ exports.servSumOrderedYesterday = async (usernameManager) => {
   }
   return "ไม่พบข้อมูล";
 };
+
 exports.servSumOrderedWeek = async (usernameManager) => {
   const timeIn = moment().subtract(7, "days");
   timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
@@ -103,6 +104,7 @@ exports.servSumOrderedWeek = async (usernameManager) => {
   }
   return "ไม่พบข้อมูล";
 };
+
 exports.servGetOrderedWeek = async (usernameManager) => {
   const timeIn = moment().subtract(7, "days");
   timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
@@ -133,6 +135,7 @@ exports.servSumOrderedMonth = async (usernameManager) => {
   }
   return "ไม่พบข้อมูล";
 };
+
 exports.servGetOrderedMonth = async (usernameManager) => {
   const timeIn = moment().subtract(30, "days");
   timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
@@ -144,6 +147,7 @@ exports.servGetOrderedMonth = async (usernameManager) => {
     timeOut
   );
 };
+
 exports.servSumOrderedYear = async (usernameManager) => {
   const timeIn = moment().subtract(1, "years");
   timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
@@ -174,6 +178,7 @@ exports.servGetOrderedYear = async (usernameManager) => {
     timeOut
   );
 };
+
 exports.servSumOrdered2Years = async (usernameManager) => {
   const timeIn = moment().subtract(2, "years");
   timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
@@ -192,6 +197,7 @@ exports.servSumOrdered2Years = async (usernameManager) => {
   }
   return "ไม่พบข้อมูล";
 };
+
 exports.servGetOrdered2Years = async (usernameManager) => {
   const timeIn = moment().subtract(2, "years");
   timeIn.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });

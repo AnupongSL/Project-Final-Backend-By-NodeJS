@@ -63,6 +63,7 @@ exports.forgetPasswordManager = async (req, res) => {
     console.log(error.massage);
   }
 }
+
 exports.forgetVerify = async (req, res) => {
   try {
     const email = req.body.email;
@@ -123,18 +124,8 @@ exports.addManager = async (req, res) => {
  }
 };
 
-
 exports.updateManager = async (req, res) => {
   const result = await managerService.servUpdate(req.sub, req.body);
-  if (result) {
-    res.status(200).json({msg: "แก้ไขข้อมูลเสร็จสิ้น" , Status: true});
-  } else {
-    res.status(200).json({msg: "ไม่พบข้อมูล" , Status: false});
-  }
-};
-
-exports.updateByManagerApp = async (req, res) => {
-  const result = await managerService.servUpdateByManagerApp(req.params.id, req.body, req.body.username);
   if (result) {
     res.status(200).json({msg: "แก้ไขข้อมูลเสร็จสิ้น" , Status: true});
   } else {

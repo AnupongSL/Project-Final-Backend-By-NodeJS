@@ -15,6 +15,7 @@ exports.repoOrderedByBill = async (manager, billedit) =>
       billnumber: billedit,
     },
   });
+  
 exports.repogetOrderedByTable = async (manager, table) =>
   await db.Orders.findAll({
     where: {

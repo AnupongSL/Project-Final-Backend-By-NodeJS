@@ -20,6 +20,7 @@ exports.getAdminByName = async (req, res) => {
     res.status(404).json({});
   }
 };
+
 exports.getAdminByUsername = async (req, res) => {
   const result = await adminServices.servByUsernameAdmin(req.sub, req.body.usernameadmin);
   if (result !== '') {
@@ -54,10 +55,11 @@ exports.addAdmin = async (req, res) => {
       .json({newData, msg: "เพิ่มข้อมูลแอดมินเรียบร้อยแล้ว" , Status: true});
   }
 };
+
 exports.updateAdmin = async (req, res) => {
-  const result = await adminServices.servByID(req.sub, req.params.id);
+  const result = await adminServices.servByUsernameAdminUpdate(req.usernameadmin);
   if (result) {
-    const dataUpdate = await adminServices.servUpdateAdmin(req.body, req.sub, req.params.id)
+    const dataUpdate = await adminServices.servUpdateAdmin(req.body, req.usernameadmin)
     res.status(200).json({msg: "อัพเดทข้อมูลแอดมินเรียบร้อยแล้ว" , Status: true , dataUpdate});
   } else {
     res.status(200).json({msg: "อัพเดทข้อมูลแอดมินไม่สำเร็จ" , Status: false});

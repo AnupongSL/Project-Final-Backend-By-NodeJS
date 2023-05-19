@@ -14,36 +14,25 @@
 
 @owner_api = {{url}}/owner
 
-@bearerToken = Bearer {{login.response.body.token}}
+@bearerTokenManager = Bearer {{login.response.body.token}}
 
+@bearerTokenAdmin = Bearer {{loginadmin.response.body.token}}
 
-GET {{user_api}}/getmanager HTTP/1.1
-###
+@bearerTokenOwner = Bearer {{loginowner.response.body.token}}
 
-GET {{user_api}}/checktoken HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzc4NDU4NywiZXhwIjoxNjg2Mzc2NTg3fQ.c7mUSbnYnysOsuKxaF3KJSZx6y7UfN66XeBFxh6mTY_uz18Fs3UZ1ic85z9MVuaKWa_iNlZw1lGwtx6589e8IBGS2Rvm86Q0hoVSkCwRJ90aEEKmoRXdPngfaFp2aOCNLtUDD6p8B70Sm0_WRzxSg6HAYPvIcxXJH-I9MANH2guj0XXPdRC2FPwAV5lqQixX7xdcuJ6SQjpW3UAdmICgm-imH1czwqoFcwIReeh-YM2HyO8xSSH0h8VhxVTAhB5cdvmNFPaBNqcsukvWa8yJTsEakQ-m-tzdoPL3sD8XDAAumWUFSx0OtHbNfJ13h_w_BA1vqwoglv-801hjdDQoCA
-###
-
-GET {{user_api}}/getmanager/2 HTTP/1.1
-###
-GET {{user_api}}/getmanagerbyusername HTTP/1.1
-Content-Type: application/json
-
-{
-    "username": "sirapop1",
-    "email": "siraphop5@gmail.com"
-}
-
-###
-
+// Manager
 # @name login
 POST {{user_api}}/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "anuponga25",
+    "username": "anupong",
     "password": "11111za"
 }
+###
+GET {{user_api}}/checktoken HTTP/1.1
+Authorization: {{bearerTokenManager}}
+
 ###
 POST {{user_api}}/forget HTTP/1.1
 Content-Type: application/json
@@ -51,104 +40,43 @@ Content-Type: application/json
 {
     "email":"kndew666@gmail.com"
 }
+
 ###
 POST {{user_api}}/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "อัญชลีภรณ์",
-    "shop_name": "ร้านอัญชลีภรณ์",
-    "username": "anuponga26",
+    "name": "อนุพงศ์",
+    "shop_name": "ร้านอนุพงศ์",
+    "username": "anupong",
     "password": "11111za",
-    "email": "kndew6667@gmail.com",
+    "email": "anupongsutlek022@gmail.com",
     "phone": "0871123654"
 }
+
 ###
 PUT {{user_api}}/editmanager HTTP/1.1
-Authorization: {{bearerToken}}
+Authorization: {{bearerTokenManager}}
 Content-Type: application/json
 
 {
     "name": "อนุพงศ์ สูตรเลข",
-    "shop_name": "ร้านแสนบาน",
+    "shop_name": "ร้านอนุพงศ์",
     "password": "11111za",
-    "email": "kndew666@gmail.com",
-    "phone": "0899999921"
+    "email": "anupongsutlek022@gmail.com",
+    "phone": "0871123654"
 }
-###
-
-DELETE  {{user_api}}/deletemanager/4 HTTP/1.1
-
-
-// Admin
-###
-GET {{admin_api}}/getadmin HTTP/1.1
-Authorization: {{bearerToken}}
-
-###
-GET {{admin_api}}/getadmin/2 HTTP/1.1
-Authorization: {{bearerToken}}
-###
-GET {{admin_api}}/getadminbyname HTTP/1.1
-Authorization: {{bearerToken}}
-Content-Type: application/json
-
-{
-    "nameadmin": "admindew"
-}
-
-###
-POST {{admin_api}}/registeradmin HTTP/1.1
-Authorization: {{bearerToken}}
-Content-Type: application/json
-
-{
-    "nameadmin": "adminpond",
-    "phoneadmin": "0955786621",
-    "emailadmin": "adminaek@gmail.com",
-    "usernameadmin": "adminpond",
-    "passwordadmin": "123456za"
-}
-
-###
-POST {{admin_api}}/loginadmin HTTP/1.1
-Content-Type: application/json
-
-{
-    "usernameadmin": "adminpond",
-    "passwordadmin": "123456za"
-}
-
-###
-
-PUT  {{admin_api}}/updateadmin/2 HTTP/1.1
-Content-Type: application/json
-Authorization: {{bearerToken}}
-
-{
-    "nameadmin": "แอดมินฟัง",
-    "phoneadmin": "0955786865",
-    "emailadmin": "adminaek@gmail.com",
-    "usernameadmin": "adminaekza1",
-    "passwordadmin": "111111za"
-}
-
-###
-DELETE {{admin_api}}/deleteadmin/5 HTTP/1.1
-Authorization: {{bearerToken}}
-
-
-// Product
 ###
 GET {{product_api}}/getproduct HTTP/1.1
-Authorization: {{bearerToken}}
+Authorization: {{bearerTokenManager}}
 
 ###
 GET {{product_api}}/getproduct/1 HTTP/1.1
-Authorization: {{bearerToken}}
+Authorization: {{bearerTokenManager}}
+
 ###
 GET {{product_api}}/getproductbyname HTTP/1.1
-Authorization: {{bearerToken}}
+Authorization: {{bearerTokenManager}}
 Content-Type: application/json
 
 {
@@ -156,13 +84,13 @@ Content-Type: application/json
 }
 ###
 POST {{product_api}}/register HTTP/1.1
-Authorization: {{bearerToken}}
+Authorization: {{bearerTokenManager}}
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="nameproduct"
 
-กะเพราไก่ไข่ดาว1
+ยำปลาทู
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="priceproduct"
 
@@ -175,13 +103,13 @@ Content-Type: image/png
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 ###
 PUT {{product_api}}/updateproduct/2 HTTP/1.1
-Authorization: {{bearerToken}}
+Authorization: {{bearerTokenManager}}
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="nameproduct"
 
-กะเพราหมูกรอบ
+กะเพราผัดเผ็ด
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="priceproduct"
 
@@ -194,76 +122,104 @@ Content-Type: image/png
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 ###
 DELETE {{{{product_api}}}}/deleteproduct/3 HTTP/1.1
-Authorization: {{bearerToken}}
+Authorization: {{bearerTokenManager}}
+###
+POST {{admin_api}}/registeradmin HTTP/1.1
+Authorization: {{bearerTokenManager}}
+Content-Type: application/json
 
-/// ORDERED
+{
+    "nameadmin": "admindew123",
+    "phoneadmin": "0955786621",
+    "emailadmin": "adminaek1234@gmail.com",
+    "usernameadmin": "admindew1",
+    "passwordadmin": "123456za"
+}
+
+###
+GET {{admin_api}}/getadmin HTTP/1.1
+Authorization: {{bearerTokenManager}}
+
+###
+GET {{admin_api}}/getadmin/2 HTTP/1.1
+Authorization: {{bearerTokenManager}}
+###
+GET {{admin_api}}/getadminbyname HTTP/1.1
+Authorization: {{bearerTokenManager}}
+Content-Type: application/json
+
+{
+    "nameadmin": "admindew1"
+}
+
+###
+DELETE {{admin_api}}/deleteadmin/5 HTTP/1.1
+Authorization: {{bearerTokenManager}}
 
 ###
 GET {{ordered_api}}/getorderall HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzg1NTE5MCwiZXhwIjoxNjg2NDQ3MTkwfQ.EtIgTbx9z3LzDvhV4tIwtBZLrybxbtDqVcos-VVPdaiAvTANEMxOHSyVs3AnuCOFGYK-CRQuw8DMps8jNs1IWLu9dK8IXVqV7YgcimDkVh9qRAqeE3UTE7kHjxgIl2S2Ts2A5jyRXFJM0S01J1xZYh4TLCBUESRGpEnlXTcE4PyTEbgCuhkGIyn2UcUmNzWdX50DTIo5MxPnY8wsjGLRhk5yHB-3UBYZMaXEqOKtsCJwaHluTs5ar7krdfAivzLcOFh-zsFOiTk7T0piJPESXQxfMlofxhBiqbYZEFdkkhMoRK2mpVB8XySuwMd8oqIWmQIXwbWMFvLxppVRdbQZKQ
+Authorization: {{bearerTokenManager}}
+
 ###
 GET {{ordered_api}}/sumorderall HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzg1NTE5MCwiZXhwIjoxNjg2NDQ3MTkwfQ.EtIgTbx9z3LzDvhV4tIwtBZLrybxbtDqVcos-VVPdaiAvTANEMxOHSyVs3AnuCOFGYK-CRQuw8DMps8jNs1IWLu9dK8IXVqV7YgcimDkVh9qRAqeE3UTE7kHjxgIl2S2Ts2A5jyRXFJM0S01J1xZYh4TLCBUESRGpEnlXTcE4PyTEbgCuhkGIyn2UcUmNzWdX50DTIo5MxPnY8wsjGLRhk5yHB-3UBYZMaXEqOKtsCJwaHluTs5ar7krdfAivzLcOFh-zsFOiTk7T0piJPESXQxfMlofxhBiqbYZEFdkkhMoRK2mpVB8XySuwMd8oqIWmQIXwbWMFvLxppVRdbQZKQ
+Authorization: {{bearerTokenManager}}
 ###
 GET {{ordered_api}}/getorderbybill/2 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzg1NTE5MCwiZXhwIjoxNjg2NDQ3MTkwfQ.EtIgTbx9z3LzDvhV4tIwtBZLrybxbtDqVcos-VVPdaiAvTANEMxOHSyVs3AnuCOFGYK-CRQuw8DMps8jNs1IWLu9dK8IXVqV7YgcimDkVh9qRAqeE3UTE7kHjxgIl2S2Ts2A5jyRXFJM0S01J1xZYh4TLCBUESRGpEnlXTcE4PyTEbgCuhkGIyn2UcUmNzWdX50DTIo5MxPnY8wsjGLRhk5yHB-3UBYZMaXEqOKtsCJwaHluTs5ar7krdfAivzLcOFh-zsFOiTk7T0piJPESXQxfMlofxhBiqbYZEFdkkhMoRK2mpVB8XySuwMd8oqIWmQIXwbWMFvLxppVRdbQZKQ
-###
-GET {{ordered_api}}/sumorderall HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzg1NTE5MCwiZXhwIjoxNjg2NDQ3MTkwfQ.EtIgTbx9z3LzDvhV4tIwtBZLrybxbtDqVcos-VVPdaiAvTANEMxOHSyVs3AnuCOFGYK-CRQuw8DMps8jNs1IWLu9dK8IXVqV7YgcimDkVh9qRAqeE3UTE7kHjxgIl2S2Ts2A5jyRXFJM0S01J1xZYh4TLCBUESRGpEnlXTcE4PyTEbgCuhkGIyn2UcUmNzWdX50DTIo5MxPnY8wsjGLRhk5yHB-3UBYZMaXEqOKtsCJwaHluTs5ar7krdfAivzLcOFh-zsFOiTk7T0piJPESXQxfMlofxhBiqbYZEFdkkhMoRK2mpVB8XySuwMd8oqIWmQIXwbWMFvLxppVRdbQZKQ
+Authorization: {{bearerTokenManager}}
 
 ###
 GET {{ordered_api}}/getordertoday HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 
 ###
 GET {{ordered_api}}/sumordertoday HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NDA3MTUxNiwiZXhwIjoxNjg2NjYzNTE2fQ.OXjgzrFS26CtL5PcaP1VH5GdxJDdm0uRBtuf3WCfj683blOsOVTdL4vv37oGs4Mvc8F1ECW5Ykexjj24E-Ox-cWa19iop1GpmKGkvPt_8g4IiG84nSAWVr5I_eJik45OWdWNhLeYfM2eeGnOPCQRL-77d72_ZIBx5A-0BLQ5ACBYJmYvQr2yLQbyo-toOOaQZNAUfJRLxqBcyB7-RYSmx8CXd4dBxWKhkXqExQ3Fn6B9m1Lb2a3Kyhr8HumbDHM2tDe7ZyX6uR0j-wPQO_QNgLTkzwMtguKBEpdzQbO1T0DRn96xPqS_f0gXkfkHQ1jL_AtE7UIn5geHzuLKGNekWw
+Authorization: {{bearerTokenManager}}
 
 ###
 
 GET {{ordered_api}}/getorderyesterday HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 ###
 
 GET {{ordered_api}}/sumorderyesterday HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 ###
 
 GET {{ordered_api}}/sumorderweek HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 ###
 
 GET {{ordered_api}}/getorderweek HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 ###
 
 GET {{ordered_api}}/getordermonth HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 
 ###
 
 GET {{ordered_api}}/sumordermonth HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 ###
 
 GET {{ordered_api}}/sumorderyear HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 ###
 
 GET {{ordered_api}}/getorderyear HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 ###
 
 GET {{ordered_api}}/sumorder2year HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 ###
 
 GET {{ordered_api}}/getorder2year HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 
 ###
 POST {{ordered_api}}/getorderbyselect HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 Content-Type: application/json
 
 {
@@ -271,7 +227,7 @@ Content-Type: application/json
 }
 ###
 POST {{ordered_api}}/getorderbynamecustomer HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 Content-Type: application/json
 
 {
@@ -279,7 +235,7 @@ Content-Type: application/json
 }
 ###
 POST {{ordered_api}}/sumorderbyselect HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 Content-Type: application/json
 
 {
@@ -288,7 +244,7 @@ Content-Type: application/json
 
 ###
 POST {{ordered_api}}/getorderbyselectbetweenday HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 Content-Type: application/json
 
 {
@@ -297,7 +253,7 @@ Content-Type: application/json
 }
 ###
 POST {{ordered_api}}/sumorderbyselectbetweenday HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MzgxNDI3OCwiZXhwIjoxNjg2NDA2Mjc4fQ.gDZkAHcnoWUwKzusRpZn4Q-andHL_1hq6TPn0uL9FTTpIb_P23nYOBRsTKFAhZ90Ghyp0tqYKp7SaNiEsw9kCa_vE7kFH1h5gO-IJmsuhk_FF3ThNyeLFUulz_lMCRJqUVnA8f1oemmOzLQpGUoEV1ynifIGPELaUVrEqqc5YgJTxhMM4U2orIA3zMUj-oNDsAEgc5bDjXT4S8JDmJHOtQDb4MEsIr-061sRGpW2CsfRAU5qa3QepMZ3414_pN-s6TAPSWxwOXmL5SaGWm-p5toEI2tWmpLr_yXjeIxCVkLHxoeyegCh53boPv3NA9tc3lDEftCF1bwtROHOEu8lJw
+Authorization: {{bearerTokenManager}}
 Content-Type: application/json
 
 {
@@ -306,8 +262,55 @@ Content-Type: application/json
 }
 
 ###
+
+DELETE {{ordered_api}}/deleteordered/2 HTTP/1.1
+Authorization: {{bearerTokenManager}}
+
+//###########################################################################################################################################
+//###########################################################################################################################################
+//###########################################################################################################################################
+
+
+// Admin
+###
+GET {{product_api}}/getproduct HTTP/1.1
+Authorization: {{bearerTokenAdmin}}
+
+###
+GET {{product_api}}/getproduct/1 HTTP/1.1
+Authorization: {{bearerTokenAdmin}}
+
+###
+GET {{user_api}}/checktoken HTTP/1.1
+Authorization: {{bearerTokenAdmin}}
+
+###
+# @name loginadmin
+POST {{admin_api}}/loginadmin HTTP/1.1
+Content-Type: application/json
+
+{
+    "usernameadmin": "admindew",
+    "passwordadmin": "123456za"
+}
+
+
+###
+PUT {{admin_api}}/updateadmin HTTP/1.1
+Authorization: {{bearerTokenAdmin}}
+Content-Type: application/json
+
+{
+    "nameadmin": "แอดมินฟัง",
+    "phoneadmin": "0955786865",
+    "emailadmin": "adminaek@gmail.com",
+    "usernameadmin": "admindew",
+    "passwordadmin": "123456za"
+}
+
+###
 POST {{ordered_api}}/addorder HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NDQ1MjkzMywiZXhwIjoxNjg3MDQ0OTMzfQ.hbuc0nBAfw2gWYR22WII_7IiA3JYu6JkpUQS0W5fBrO1fhlrhP7HgCJMc9_NBFhs5QMevhn34Nhw4c0PZvBrUsfMYjv0Mn9vmWuF2CsT2ZeVQH2uED1zs_wSOzttsX9KPQgY9wPvPtCrB3rknYLbhkPNCNQRWna6yMpgvm3Q51iM3otcQK96RvBTN8IlLJbS3GAhN6hQdmbPl64C44bmzDb5dgA9Dr5eEvO9CgK545L-ZdQCTHweyX44kKJwAgjesYCvMbjOrzZhSpVuEHdJYIa-fAArzHZ7tGuc-9objE9Vqy44jIHsC19HkoKrZFLCP2Na5zkzlONBObZNLr-hUQ
+Authorization: {{bearerTokenAdmin}}
 Content-Type: application/json
 
  [
@@ -341,55 +344,55 @@ Content-Type: application/json
     
 ]
 
+
+
+//###########################################################################################################################################
+//###########################################################################################################################################
+//###########################################################################################################################################
+
+
+
+
+// OWNER
 ###
-
-DELETE {{ordered_api}}/deleteordered/2 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnVwb25nYTI1IiwidXNlcm5hbWVhZG1pbiI6ImFkbWlucG9uZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Mzg1NTE5MCwiZXhwIjoxNjg2NDQ3MTkwfQ.EtIgTbx9z3LzDvhV4tIwtBZLrybxbtDqVcos-VVPdaiAvTANEMxOHSyVs3AnuCOFGYK-CRQuw8DMps8jNs1IWLu9dK8IXVqV7YgcimDkVh9qRAqeE3UTE7kHjxgIl2S2Ts2A5jyRXFJM0S01J1xZYh4TLCBUESRGpEnlXTcE4PyTEbgCuhkGIyn2UcUmNzWdX50DTIo5MxPnY8wsjGLRhk5yHB-3UBYZMaXEqOKtsCJwaHluTs5ar7krdfAivzLcOFh-zsFOiTk7T0piJPESXQxfMlofxhBiqbYZEFdkkhMoRK2mpVB8XySuwMd8oqIWmQIXwbWMFvLxppVRdbQZKQ
-
-
-    // OWNER
-###
-GET {{owner_api}}/getownerall HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiLguK3guJnguLjguJ7guIfguKjguYwg4Liq4Li54LiV4Lij4LmA4Lil4LiCIiwidXNlcm5hbWUiOiJhbnBvbmdzdXRsZWsiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2ODM4NjI1MjAsImV4cCI6MTY4NjQ1NDUyMH0.YaV7W6d0ne00HVmn58TJ1mzqQgEnyc5m3a08YBlJraFdZCnR6D3eR8y8nF18a0Tm8B0wAWPj7LwATq8wDUpGFZMH0pQ3B6CV9pOUVwSEF1ZLbvcZwo9GGrT4ZD4QmK5iVqFNE0TEmV_my52yzBlZ1AgCTUkdov4-21YPIo1ARIwGkaH-xAhi92Sp8qlH_7cAlOWUBVs6DAbXZYhovx0Lc1v_GSA-srVXBN8e1quUbNwafpzRH62bPjTVRhcusZbGcBI-ZYsNhpZFvSmHrktNdg_X5aHk6W7BWB_e3Q5amrMZ9_6EHDE6TV5zu3DWI8_SwxGjjTW8T3qF22XW1gmw0Q
+GET {{user_api}}/getmanager HTTP/1.1
 
 ###
+GET {{user_api}}/getmanager/2 HTTP/1.1
+
+###
+GET {{user_api}}/checktoken HTTP/1.1
+Authorization: {{bearerTokenOwner}}
+
+###
+POST {{ordered_api}}/sumorderallbyusername HTTP/1.1
+Authorization: {{bearerTokenOwner}}
+Content-Type: application/json
+
+{
+    "username": "anupong"
+}
+###
+# @name loginowner
 POST {{owner_api}}/loginowner HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "adminpond",
-    "password": "123456za"
+    "username": "anpongsutlek",
+    "password": "0917076980za"
 }
 
-
-
 ###
-POST {{owner_api}}/addowner HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiLguK3guJnguLjguJ7guIfguKjguYwg4Liq4Li54LiV4Lij4LmA4Lil4LiCIiwidXNlcm5hbWUiOiJhbnBvbmdzdXRsZWsiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2ODM4NjI1MjAsImV4cCI6MTY4NjQ1NDUyMH0.YaV7W6d0ne00HVmn58TJ1mzqQgEnyc5m3a08YBlJraFdZCnR6D3eR8y8nF18a0Tm8B0wAWPj7LwATq8wDUpGFZMH0pQ3B6CV9pOUVwSEF1ZLbvcZwo9GGrT4ZD4QmK5iVqFNE0TEmV_my52yzBlZ1AgCTUkdov4-21YPIo1ARIwGkaH-xAhi92Sp8qlH_7cAlOWUBVs6DAbXZYhovx0Lc1v_GSA-srVXBN8e1quUbNwafpzRH62bPjTVRhcusZbGcBI-ZYsNhpZFvSmHrktNdg_X5aHk6W7BWB_e3Q5amrMZ9_6EHDE6TV5zu3DWI8_SwxGjjTW8T3qF22XW1gmw0Q
-Content-Type: application/json
-
-{
-
-    "namemanagerapp": "ฟัง",
-    "username": "adminpond",
-    "password": "123456za",
-    "email": "adminaek@gmail.com",
-    "mobile": "0955786621"
-
-}
-###
-
-PUT {{owner_api}}/updateowner/2 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiLguK3guJnguLjguJ7guIfguKjguYwg4Liq4Li54LiV4Lij4LmA4Lil4LiCIiwidXNlcm5hbWUiOiJhbnBvbmdzdXRsZWsiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2ODM4NjI1MjAsImV4cCI6MTY4NjQ1NDUyMH0.YaV7W6d0ne00HVmn58TJ1mzqQgEnyc5m3a08YBlJraFdZCnR6D3eR8y8nF18a0Tm8B0wAWPj7LwATq8wDUpGFZMH0pQ3B6CV9pOUVwSEF1ZLbvcZwo9GGrT4ZD4QmK5iVqFNE0TEmV_my52yzBlZ1AgCTUkdov4-21YPIo1ARIwGkaH-xAhi92Sp8qlH_7cAlOWUBVs6DAbXZYhovx0Lc1v_GSA-srVXBN8e1quUbNwafpzRH62bPjTVRhcusZbGcBI-ZYsNhpZFvSmHrktNdg_X5aHk6W7BWB_e3Q5amrMZ9_6EHDE6TV5zu3DWI8_SwxGjjTW8T3qF22XW1gmw0Q
+PUT {{owner_api}}/updateowner HTTP/1.1
+Authorization: {{bearerTokenOwner}}
 Content-Type: application/json
 
 {
     "namemanagerapp": "เอก",
-    "username": "adminpond",
-    "password": "123456za",
+    "username": "anpongsutlek",
+    "password": "0917076980za",
     "email": "adminaek@gmail.com",
     "mobile": "0955786621"
 }
 ###
-DELETE {{owner_api}}/deleteowner/2 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiLguK3guJnguLjguJ7guIfguKjguYwg4Liq4Li54LiV4Lij4LmA4Lil4LiCIiwidXNlcm5hbWUiOiJhbnBvbmdzdXRsZWsiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2ODM4NjI1MjAsImV4cCI6MTY4NjQ1NDUyMH0.YaV7W6d0ne00HVmn58TJ1mzqQgEnyc5m3a08YBlJraFdZCnR6D3eR8y8nF18a0Tm8B0wAWPj7LwATq8wDUpGFZMH0pQ3B6CV9pOUVwSEF1ZLbvcZwo9GGrT4ZD4QmK5iVqFNE0TEmV_my52yzBlZ1AgCTUkdov4-21YPIo1ARIwGkaH-xAhi92Sp8qlH_7cAlOWUBVs6DAbXZYhovx0Lc1v_GSA-srVXBN8e1quUbNwafpzRH62bPjTVRhcusZbGcBI-ZYsNhpZFvSmHrktNdg_X5aHk6W7BWB_e3Q5amrMZ9_6EHDE6TV5zu3DWI8_SwxGjjTW8T3qF22XW1gmw0Q
+DELETE {{user_api}}/deletemanager/4 HTTP/1.1

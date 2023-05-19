@@ -1,5 +1,4 @@
 const db = require("../database/models");
-const { Op } = require("sequelize");
 
 exports.repoProductAll = async (manager) =>
 await db.Products.findAll({
@@ -23,7 +22,6 @@ exports.repoProductByName = async (manager, nameproduct) =>
       nameproduct: nameproduct,
     },
   });
-
 
 exports.repoAddProduct = async (product1) => await db.Products.create(product1);
 

@@ -21,6 +21,7 @@ exports.repoUsername = async (username) =>
       username: username,
     },
   });
+
 exports.repoByEmail = async (email) =>
   await db.Managers.findAll({
     where: {
@@ -41,13 +42,6 @@ exports.repoUpdate = async (username, manager1) =>
   await db.Managers.update(manager1, {
     where: {
       username: username,
-    },
-  });
-
-exports.repoUpdateByManagerApp = async (id, manager1) =>
-  await db.Managers.update(manager1, {
-    where: {
-      id: id,
     },
   });
 

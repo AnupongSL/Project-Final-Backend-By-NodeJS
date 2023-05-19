@@ -12,6 +12,9 @@ exports.servByName = async (usernameManager, nameAdmin) =>
 exports.servByUsernameAdmin = async (usernameManager, usernameAdmin) =>
   await adminRepositories.repoByUsername(usernameManager, usernameAdmin);
 
+exports.servByUsernameAdminUpdate = async (usernameAdmin) =>
+  await adminRepositories.repoUsernameAdmin(usernameAdmin);
+
 exports.servLoginAddmin = async (usernameadmin, passwordadmin) => {
     const result = await adminRepositories.repoUsernameAdmin(usernameadmin);
     if (result != "") {
@@ -24,6 +27,7 @@ exports.servLoginAddmin = async (usernameadmin, passwordadmin) => {
           usernameadmin: usernameadmin,
           role: role,
         };
+        console.log(usernameadmin);
         return jwt.generateToken(payload);
       } else {
         return { message: "รหัสผ่านไม่ถูกต้อง", Status: 0 };
@@ -41,10 +45,10 @@ exports.servAddAdmin = async (admin1, usernameManager, shop_name) =>
     shop_name: shop_name,
   });
 
-exports.servUpdateAdmin = async (admin1, usernameManager, id) => {
-  const updated = await adminRepositories.repoUpdate(id, {...admin1});
+exports.servUpdateAdmin = async (admin1, usernameAdmin) => {
+  const updated = await adminRepositories.repoUpdate(usernameAdmin, {...admin1});
     if (updated) {
-      return await adminRepositories.repoByID(usernameManager, id);
+      return await adminRepositories.repoUsernameAdmin(usernameAdmin);
   }
   return null;
 };

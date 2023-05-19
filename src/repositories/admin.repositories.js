@@ -1,5 +1,4 @@
 const db = require("../database/models");
-const { Op } = require("sequelize");
 
 exports.repoAll = async (manager) =>
   await db.Admins.findAll({
@@ -38,12 +37,13 @@ exports.repoUsernameAdmin = async (usernameadmin) =>
       usernameadmin: usernameadmin,
     },
   });
+  
 exports.repoAddAdmin = async (admin1) => await db.Admins.create(admin1);
 
-exports.repoUpdate = async (id, admin1) =>
+exports.repoUpdate = async (usernameAdmin, admin1) =>
   await db.Admins.update(admin1, {
     where: {
-      id: id,
+      usernameadmin: usernameAdmin,
     },
   });
 
