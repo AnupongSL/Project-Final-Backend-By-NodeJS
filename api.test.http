@@ -361,8 +361,8 @@ POST {{user_api}}/forget-password HTTP/1.1
 Content-Type: application/json
 
 {
-    "password": "123456",
-    "password2": "123456"
+    "password": "1111112",
+    "password2": "1111112"
 }
 ###
 GET {{user_api}}/getmanager/2 HTTP/1.1
@@ -386,11 +386,11 @@ POST {{user_api}}/forget HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "62022901@up.ac.th"
+    "email": "anupongsutlek022@gmail.com"
 }
 // anupongsutlek022@gmail.com // owner
-// kndew666@gmail.com //manager
-// nongaek@gmail.com // admin
+// Kndew666@gmail.com //manager
+// kongfang095@gmail.com // admin
 ###
 # @name loginowner
 POST {{owner_api}}/loginowner HTTP/1.1

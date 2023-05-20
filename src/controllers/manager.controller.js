@@ -175,7 +175,7 @@ const forgetPassword = async (name, email, token, res) => {
     body: {
       name: name,
       intro:
-        '<p>Please click here to <a href="http://127.0.0.1:3000/forget-password?token=' +
+        '<p>Please click here to <a href="http://localhost:3000/forgetpassword/' +
         token +
         '"> Reset </a> your password.</a></p>',
     },
