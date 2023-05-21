@@ -244,10 +244,14 @@ exports.AddOrdered = async (req, res) => {
       data[i]
     );
   }
-
+  const result = await orderedServices.servGetOrderedByBill(
+    req.sub,
+    bill
+  );
   res.status(200).json({
     msg: "เพิ่มข้อมูลที่ลูกค้าสั่งเรียบร้อยแล้ว",
     Status: true,
+    result
   });
 };
 

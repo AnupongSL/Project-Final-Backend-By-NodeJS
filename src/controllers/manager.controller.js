@@ -83,7 +83,7 @@ exports.forgetVerify = async (req, res) => {
   try {
     const email = req.body.email;
     const userData = await managerService.servByEmail(email);
-    if (userData) {
+    if (userData != undefined) {
       const randomString = randomstring.generate();
       roleToken = userData[0]["role"];
       if(roleToken == "manager"){
@@ -98,10 +98,10 @@ exports.forgetVerify = async (req, res) => {
         myValue = randomString;
         forgetPassword(name, email, randomString, res);
       } else {
-        res.render("forget", { message: "อีเมลของผู้ใช้ไม่ถูกต้อง" });        
+        res.status(200).json({ message: "อีเมลของผู้ใช้ไม่ถูกต้อง" });        
       }
     } else {
-      res.render("forget", { message: "ไม่พบอีเมลของท่านในระบบ" });
+      res.status(200).json({ message: "ไม่พบอีเมลของท่านในระบบ" });
     }
   } catch (error) {
     // console.log(error.massage);
