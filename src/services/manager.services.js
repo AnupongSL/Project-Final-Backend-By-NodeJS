@@ -29,29 +29,28 @@ exports.servByEmail = async (email) => {
 exports.servUsername = async (username) =>
   await managerRepository.repoUsername(username);
 
-exports.servLogin = async (username, password) => {
+exports.servLogin = async (username) => {
   const result = await managerRepository.repoUsername(username);
   if (result != "") {
-    const passwordA = result[0]["password"];
     const shopName = result[0]["shop_name"];
     const role = result[0]["role"];
-    if (passwordA == password) {
-      const payload = {
-        sub: username,
-        shop_name: shopName,
-        role: role,
-      };
-      return jwt.generateToken(payload);
-    } else {
-      return { message: "รหัสผ่านไม่ถูกต้อง", Status: 0 };
-    }
+    const payload = {
+      sub: username,
+      shop_name: shopName,
+      role: role,
+    };
+    return jwt.generateToken(payload);
   } else {
     return { message: "กรุณากรอกยูสเซอร์ให้ถูกต้อง", Status: 1 };
   }
 };
 
-exports.servAdd = async (manager1) =>
-  await managerRepository.repoAdd({ ...manager1, role: "manager" });
+exports.servAdd = async (manager1, passwordHash) =>
+  await managerRepository.repoAdd({
+    ...manager1,
+    password: passwordHash,
+    role: "manager",
+  });
 
 exports.servResetPassword = async (myValue, password, roleToken) => {
   if (roleToken == "manager") {
@@ -80,11 +79,12 @@ exports.servResetPassword = async (myValue, password, roleToken) => {
     return updatedPasswordOwner;
   }
 };
-exports.servUpdate = async (username, manager1) => {
+exports.servUpdate = async (username, passwordHash, manager1) => {
   const result = await managerRepository.repoUsername(username);
   if (result) {
     const updated = await managerRepository.repoUpdate(username, {
       ...manager1,
+      password: passwordHash,
       role: "manager",
       username,
     });

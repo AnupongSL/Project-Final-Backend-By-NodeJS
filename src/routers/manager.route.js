@@ -4,6 +4,7 @@ const jwt = require('../middleware/jwt')
 
 router.get('/getmanager', managerController.getManager) //ดึงข้อมูลเจ้าของร้านทั้งหมด
 router.get('/getmanager/:id', managerController.getManagerByID) //ดึงข้อมูลเจ้าของร้านตามไอดีของเจ้าของร้าน
+router.post('/getmanagerbyowner', managerController.getManagerByOwner) //ดึง username manager มาเพื่อดูยอดขายของร้าน
 router.post('/getmanagerbyusername', managerController.getManagerUsername) // ดึงข้อมูลเจ้าของร้านตาม username
 router.get('/getmanagerbyusernameemail', managerController.getManagerUsernameEmail) //ดึงข้อมูลเจ้าของร้านตาม username และ email
 router.get('/checktoken', jwt.verifyToken, managerController.checkToken); // เช็คว่าล้อคอินไหม แล้วเช็คว่าคนที่ล้อคอินคือใคร owner, manager, admin

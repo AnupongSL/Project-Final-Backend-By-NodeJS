@@ -1,7 +1,14 @@
 const orderedServices = require("../services/ordered.services");
+const managerController = require("./manager.controller")
 var bill = 0;
+let nameManager;
+
 
 exports.getOrderedAll = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const result = await orderedServices.servGetOrderedAll(req.sub);
   if (result != "") {
     res.json({ result });
@@ -10,6 +17,10 @@ exports.getOrderedAll = async (req, res) => {
   }
 };
 exports.getOrderedByBill = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const result = await orderedServices.servGetOrderedByBill(
     req.sub,
     req.params.bill
@@ -21,6 +32,10 @@ exports.getOrderedByBill = async (req, res) => {
   }
 };
 exports.getOrderedByTable = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const result = await orderedServices.servgetOrderedByTable(req.sub, req.params.table)
   if (result != "") {
     res.json({ result });
@@ -30,6 +45,10 @@ exports.getOrderedByTable = async (req, res) => {
 }
 
 exports.getOrderedBynameCustomer = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const result = await orderedServices.servGetOrderedByCustomer(
     req.sub,
     req.body.namecustomer
@@ -42,6 +61,10 @@ exports.getOrderedBynameCustomer = async (req, res) => {
 };
 
 exports.SumOrderedAll = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedAll(req.sub);
   if (name !== undefined) {
@@ -52,6 +75,10 @@ exports.SumOrderedAll = async (req, res) => {
 };
 
 exports.sumOrderedAllByUsername = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   username = req.body.username;
   const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedAll(username);
@@ -63,6 +90,10 @@ exports.sumOrderedAllByUsername = async (req, res) => {
 };
 
 exports.getOrderedToday = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const result = await orderedServices.servGetOrderedToday(req.sub);
   if (result != "") {
     res.status(200).json({ result });
@@ -72,6 +103,10 @@ exports.getOrderedToday = async (req, res) => {
 };
 
 exports.SumOrderedToday = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedToday(req.sub);
   if (name !== undefined) {
@@ -82,6 +117,10 @@ exports.SumOrderedToday = async (req, res) => {
 };
 
 exports.GetOrderedYesterday = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const result = await orderedServices.servGetOrderedYesterday(req.sub);
   if (result != "") {
     res.status(200).json({ result });
@@ -91,6 +130,10 @@ exports.GetOrderedYesterday = async (req, res) => {
 };
 
 exports.SumOrderedYesterday = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedYesterday(req.sub);
   if (name !== undefined) {
@@ -101,6 +144,10 @@ exports.SumOrderedYesterday = async (req, res) => {
 };
 
 exports.GetOrderedWeek = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const result = await orderedServices.servGetOrderedWeek(req.sub);
   if (result != "") {
     res.status(200).json({ result });
@@ -110,6 +157,10 @@ exports.GetOrderedWeek = async (req, res) => {
 };
 
 exports.SumOrderedWeek = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedWeek(req.sub);
   if (name !== undefined) {
@@ -120,6 +171,10 @@ exports.SumOrderedWeek = async (req, res) => {
 };
 
 exports.GetOrderedMonth = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const result = await orderedServices.servGetOrderedMonth(req.sub);
   if (result != "") {
     res.status(200).json({ result });
@@ -129,6 +184,10 @@ exports.GetOrderedMonth = async (req, res) => {
 };
 
 exports.SumOrderedMonth = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedMonth(req.sub);
   if (name !== undefined) {
@@ -139,6 +198,10 @@ exports.SumOrderedMonth = async (req, res) => {
 };
 
 exports.GetOrderedYear = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const result = await orderedServices.servGetOrderedYear(req.sub);
   if (result != "") {
     res.status(200).json({ result });
@@ -148,6 +211,10 @@ exports.GetOrderedYear = async (req, res) => {
 };
 
 exports.SumOrderedYear = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedYear(req.sub);
   if (name !== undefined) {
@@ -158,6 +225,10 @@ exports.SumOrderedYear = async (req, res) => {
 };
 
 exports.GetOrdered2Years = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const result = await orderedServices.servGetOrdered2Years(req.sub);
   if (result != "") {
     res.status(200).json({ result });
@@ -167,6 +238,10 @@ exports.GetOrdered2Years = async (req, res) => {
 };
 
 exports.SumOrdered2Years = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const { name, price, countorder, sumpriceAll, sumAll } =
     await orderedServices.servSumOrdered2Years(req.sub);
   if (name !== undefined) {
@@ -177,6 +252,10 @@ exports.SumOrdered2Years = async (req, res) => {
 };
 
 exports.GetOrderedBySelect = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const result = await orderedServices.servGetOrderedBySelect(
     req.sub,
     req.body.date
@@ -189,6 +268,10 @@ exports.GetOrderedBySelect = async (req, res) => {
 };
 
 exports.SumOrderedBySelect = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const { name, price, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedBySelect(req.sub, req.body.date);
   if (name !== undefined) {
@@ -199,6 +282,10 @@ exports.SumOrderedBySelect = async (req, res) => {
 };
 
 exports.GetOrderedBySelectBetweenDay = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const { datestart, datestop } = req.body;
   const result = await orderedServices.servGetOrderedBySelectBetweenDay(
     req.sub,
@@ -213,6 +300,10 @@ exports.GetOrderedBySelectBetweenDay = async (req, res) => {
 };
 
 exports.SumOrderedBySelectBetweenDay = async (req, res) => {
+  if(req.sub == undefined){
+    nameManager = await managerController.usernameManager();
+    req.sub = nameManager
+  }
   const { datestart, datestop } = req.body;
   const { name, price, sumpriceAll, sumAll } =
     await orderedServices.servSumOrderedBySelectBetweenDay(
@@ -248,6 +339,7 @@ exports.AddOrdered = async (req, res) => {
     req.sub,
     bill
   );
+  
   res.status(200).json({
     msg: "เพิ่มข้อมูลที่ลูกค้าสั่งเรียบร้อยแล้ว",
     Status: true,

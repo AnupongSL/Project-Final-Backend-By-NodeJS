@@ -8,6 +8,8 @@ const Mailgen = require("mailgen");
 
 let myValue;
 let roleToken;
+let UsernameManager;
+
 
 exports.getManager = async (req, res) =>
   res.json(await managerService.servAll());
@@ -25,6 +27,20 @@ exports.getManagerUsername = async (req, res) => {
   const result = await managerService.servUsername(req.body.username);
   if (result) {
     res.status(200).json({ msg: "พบข้อมูล", result });
+  } else {
+    res.status(200).json({ msg: "ไม่พบข้อมูล" });
+  }
+};
+
+exports.usernameManager = async () => {
+  return await UsernameManager
+}
+
+exports.getManagerByOwner = async (req, res) => {
+  const result = await managerService.servUsername(req.body.username);
+  UsernameManager = result[0]["username"]
+  if (result) {
+    res.status(200).json({ msg: `ชื่อเจ้าของร้าน: ${UsernameManager}`});
   } else {
     res.status(200).json({ msg: "ไม่พบข้อมูล" });
   }
@@ -61,7 +77,8 @@ exports.checkToken = async (req, res) => {
     res.json({
       Status: true,
       msg: "Verified",
-      username: req.sub,
+      UsernameManager: UsernameManager,
+      username: req.username,
       role: req.role,
     });
   }
@@ -71,14 +88,24 @@ exports.checkToken = async (req, res) => {
 
 exports.loginManager = async (req, res) => {
   const { username, password } = req.body;
-  const token = await managerService.servLogin(username, password);
-  if (!token) {
-    res.status(200).json({ msg: "ไม่พบผู้ใช้งานในระบบ" });
-    return;
+  const result = await managerService.servUsername(username);
+  if (result != "") {
+    const checkPassword = result[0]["password"];
+    const isMatch = await bcrypt.compare(password, checkPassword);
+    if (isMatch == true) {
+      const token = await managerService.servLogin(username);
+      if (!token) {
+        res.status(200).json({ msg: "ไม่พบผู้ใช้งานในระบบ" });
+        return;
+      }
+      res.json({ token });
+    } else {
+      res.status(200).json({ msg: "รหัสผ่านไม่ถูกต้อง", Status: false });
+    }
+  } else {
+    res.status(200).json({ msg: "ไม่พบผู้ใช้ในระบบ", Status: false });
   }
-  res.json({ token });
 };
-
 exports.forgetVerify = async (req, res) => {
   try {
     const email = req.body.email;
@@ -86,41 +113,53 @@ exports.forgetVerify = async (req, res) => {
     if (userData != undefined) {
       const randomString = randomstring.generate();
       roleToken = userData[0]["role"];
-      if(roleToken == "manager"){
+      if (roleToken == "manager") {
         name = userData[0]["name"];
-      } else if(roleToken == "admin"){
+      } else if (roleToken == "admin") {
         name = userData[0]["nameadmin"];
-      } else if(roleToken == "owner"){
+      } else if (roleToken == "owner") {
         name = userData[0]["namemanagerapp"];
       }
-      const emailValue = await managerService.servupdateToken(email, randomString, roleToken);
-      if (emailValue != ""){
+      const emailValue = await managerService.servupdateToken(
+        email,
+        randomString,
+        roleToken
+      );
+      if (emailValue != "") {
         myValue = randomString;
-        forgetPassword(name, email, randomString, res);
+        //forgetPassword(name, email, randomString, res);
       } else {
-        res.status(200).json({ message: "อีเมลของผู้ใช้ไม่ถูกต้อง" });        
+        res
+          .status(200)
+          .json({ message: "อีเมลของผู้ใช้ไม่ถูกต้อง", Status: false });
       }
     } else {
-      res.status(200).json({ message: "ไม่พบอีเมลของท่านในระบบ" });
+      res
+        .status(200)
+        .json({ message: "ไม่พบอีเมลของท่านในระบบ", Status: false });
     }
   } catch (error) {
     // console.log(error.massage);
   }
 };
 
-exports.resetPassword = async (req, res) => {  
-    const password = req.body.password;
-    const password2 = req.body.password2;
-    if(password == password2){
-      // const secure_password = await securePassword(password);
-      const resetPW = await managerService.servResetPassword(myValue, password, roleToken)
-      if (resetPW) {
-        res.status(200).json({ msg: "แก้ไขรหัสผ่านเรียบร้อยแล้ว", Status: true });
-      } else {
-        res.status(200).json({ msg: "แก้ไขรหัสผ่านไม่สำเร็จ", Status: false });
-      }
-    }   
-}
+exports.resetPassword = async (req, res) => {
+  const password = req.body.password;
+  const password2 = req.body.password2;
+  if (password == password2) {
+    const secure_password = await securePassword(password);
+    const resetPW = await managerService.servResetPassword(
+      myValue,
+      secure_password,
+      roleToken
+    );
+    if (resetPW) {
+      res.status(200).json({ msg: "แก้ไขรหัสผ่านเรียบร้อยแล้ว", Status: true });
+    } else {
+      res.status(200).json({ msg: "แก้ไขรหัสผ่านไม่สำเร็จ", Status: false });
+    }
+  }
+};
 
 exports.addManager = async (req, res) => {
   const result = await managerService.servUnEm(
@@ -133,17 +172,36 @@ exports.addManager = async (req, res) => {
       Status: false,
     });
   } else {
-    const dataAdd = await managerService.servAdd(req.body);
+    const password = req.body.password;
+    const passwordHash = await securePassword(password);
+    const dataAdd = await managerService.servAdd(req.body, passwordHash);
     res.status(200).json({ msg: "เพิ่มผู้ใช้งานแล้ว", Status: true, dataAdd });
   }
 };
 
 exports.updateManager = async (req, res) => {
-  const result = await managerService.servUpdate(req.sub, req.body);
+  const result = await managerService.servUsername(req.sub);
   if (result) {
-    res.status(200).json({ msg: "แก้ไขข้อมูลเสร็จสิ้น", Status: true });
+    const checkPassword = result[0]["password"];
+    const password = req.body.password;
+    const isMatch = await bcrypt.compare(password, checkPassword);
+    const passwordHash = await securePassword(password);
+    if (isMatch == true) {
+      const updated = await managerService.servUpdate(
+        req.sub,
+        passwordHash,
+        req.body
+      );
+      if (updated) {
+        res.status(200).json({ msg: "แก้ไขข้อมูลเสร็จสิ้น", Status: true, updated });
+      } else {
+        res.status(200).json({ msg: "ไม่พบข้อมูล", Status: false });
+      }
+    } else {
+      res.status(200).json({ msg: "รหัสผ่านไม่ถูกต้อง", Status: false });
+    }
   } else {
-    res.status(200).json({ msg: "ไม่พบข้อมูล", Status: false });
+    res.status(200).json({ msg: "อัพเดทข้อมูลแอดมินไม่สำเร็จ", Status: false });
   }
 };
 
@@ -204,11 +262,13 @@ const forgetPassword = async (name, email, token, res) => {
     });
 };
 
-const securePassword = async(password) => {
+const securePassword = async (password) => {
   try {
-    const passwordHash = await bcrypt.hash(password, 10)
+    const passwordHash = await bcrypt.hash(password, 10);
     return passwordHash;
   } catch (error) {
     console.log(error.message);
   }
-}
+};
+
+
