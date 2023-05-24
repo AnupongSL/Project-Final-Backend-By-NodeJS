@@ -2,6 +2,8 @@ const adminServices = require("../services/admin.services");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+let passwordHash;
+
 exports.getAdminAll = async (req, res) =>
   res.json(await adminServices.servAdminAll(req.sub));
 
@@ -94,9 +96,15 @@ exports.updateAdmin = async (req, res) => {
   if (result) {
     const checkPassword = result[0]["passwordadmin"];
     const password = req.body.passwordadmin;
+    const newPassword = req.body.newpassword;
     const isMatch = await bcrypt.compare(password, checkPassword);
-    const passwordHash = await securePassword(password)
     if (isMatch == true){
+      if(newPassword != ""){
+        const salt = await securePassword(newPassword)
+        passwordHash = salt;
+      } else{
+        passwordHash = checkPassword
+      }
       const dataUpdate = await adminServices.servUpdateAdmin(
         req.body,
         passwordHash,

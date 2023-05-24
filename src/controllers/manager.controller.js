@@ -9,7 +9,7 @@ const Mailgen = require("mailgen");
 let myValue;
 let roleToken;
 let UsernameManager;
-
+let passwordHash;
 
 exports.getManager = async (req, res) =>
   res.json(await managerService.servAll());
@@ -127,7 +127,7 @@ exports.forgetVerify = async (req, res) => {
       );
       if (emailValue != "") {
         myValue = randomString;
-        //forgetPassword(name, email, randomString, res);
+        forgetPassword(name, email, randomString, res);
       } else {
         res
           .status(200)
@@ -184,9 +184,15 @@ exports.updateManager = async (req, res) => {
   if (result) {
     const checkPassword = result[0]["password"];
     const password = req.body.password;
+    const newPassword = req.body.newpassword;
     const isMatch = await bcrypt.compare(password, checkPassword);
-    const passwordHash = await securePassword(password);
     if (isMatch == true) {
+      if(newPassword != ""){
+        const salt = await securePassword(newPassword)
+        passwordHash = salt;
+      } else{
+        passwordHash = checkPassword
+      }
       const updated = await managerService.servUpdate(
         req.sub,
         passwordHash,

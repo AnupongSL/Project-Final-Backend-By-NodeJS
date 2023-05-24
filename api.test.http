@@ -416,9 +416,9 @@ Authorization: {{bearerTokenOwner}}
 Content-Type: application/json
 
 {
-    "namemanagerapp": "เอกน้อย",
+    "namemanagerapp": "เอก1",
     "username": "anpongsutlek",
-    "password": "1111112",
+    "password": "12345",
     "email": "anupongsutlek022@gmail.com",
     "mobile": "0955786621"
 }

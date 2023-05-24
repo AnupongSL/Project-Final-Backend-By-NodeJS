@@ -1,6 +1,8 @@
 const ownerServices = require("../services/owner.services");
 const bcrypt = require("bcryptjs");
 
+let passwordHash;
+
 exports.getOwner = async (req, res) =>
   res.json(await ownerServices.servGetOwner());
 
@@ -32,9 +34,15 @@ exports.updateOwner = async (req, res) => {
   if (result) {
     const checkPassword = result[0]["password"];
     const password = req.body.password;
+    const newPassword = req.body.newpassword;
     const isMatch = await bcrypt.compare(password, checkPassword);
-    const passwordHash = await securePassword(password)
     if (isMatch) {
+      if(newPassword != ""){
+        const salt = await securePassword(newPassword)
+        passwordHash = salt;
+      } else{
+        passwordHash = checkPassword
+      }
       const dataUpdate = await ownerServices.servUpdateOwner(
         req.body,
         passwordHash,
